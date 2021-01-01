@@ -10,6 +10,6 @@ public abstract class BaseFactory<T extends BaseEntity> {
      * @param save true if persist object
      * @return a new object
      */
-    public abstract  T create(boolean save);
+    public abstract  T createToTest(boolean save);
 
 }

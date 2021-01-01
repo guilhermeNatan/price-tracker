@@ -12,7 +12,7 @@ public class PlatformFactory extends BaseFactory<Platform> {
     private PlatformRepo platformRepo;
 
     @Override
-    public Platform create(boolean save) {
+    public Platform createToTest(boolean save) {
         return create(save, PlatformEnum.PLAYSTATION_4);
     }
 
