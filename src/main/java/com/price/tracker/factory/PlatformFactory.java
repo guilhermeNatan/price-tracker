@@ -1,6 +1,7 @@
 package com.price.tracker.factory;
 
 import com.price.tracker.entity.Platform;
+import com.price.tracker.entity.PlatformEnum;
 import com.price.tracker.repository.PlatformRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,10 +13,10 @@ public class PlatformFactory extends BaseFactory<Platform> {
 
     @Override
     public Platform create(boolean save) {
-        return create(save, "Playstation Store");
+        return create(save, PlatformEnum.PLAYSTATION_4);
     }
 
-    public Platform create(boolean save, String name) {
+    public Platform create(boolean save, PlatformEnum name) {
         Platform platform = new Platform();
         platform.setName(name);
         if(save) {

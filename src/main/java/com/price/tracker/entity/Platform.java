@@ -11,9 +11,7 @@ import java.util.List;
 @Entity
 public class Platform extends BaseEntity {
 
-    @Length(max = 100)
-    private String name;
-
+    private  PlatformEnum name;
     @ManyToMany
     private List<Game> games;
 

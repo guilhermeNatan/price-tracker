@@ -15,12 +15,12 @@ public class PlatformTest  extends BaseTest{
 
     @Override
     public void createEntityTest() {
-        platformFactory.create(true, "Xbox 360");
+        platformFactory.create(true, PlatformEnum.PLAYSTATION_4);
     }
 
     @Override
     public void deleteEntityTest() {
-        Platform platform = platformFactory.create(true, "Xbox 360");
+        Platform platform = platformFactory.create(true, PlatformEnum.PLAYSTATION_4);
         platformRepo.delete(platform);
     }
 }
