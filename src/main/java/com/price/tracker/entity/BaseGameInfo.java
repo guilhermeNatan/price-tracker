@@ -6,6 +6,6 @@ import javax.persistence.MappedSuperclass;
 
 @Data
 @MappedSuperclass
-public class StoreInfo extends BaseEntity {
+public class BaseGameInfo extends BaseEntity {
     private String link;
 }

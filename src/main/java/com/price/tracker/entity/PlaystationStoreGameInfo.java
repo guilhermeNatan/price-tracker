@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 
 @Data
 @Entity
-public class PlaystationStoreInfo extends StoreInfo {
+public class PlaystationStoreGameInfo extends BaseGameInfo {
     private String playstationStoreId;
     private Integer playstionStoreIndex;
 

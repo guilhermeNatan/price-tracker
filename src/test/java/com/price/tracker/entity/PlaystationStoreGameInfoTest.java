@@ -6,7 +6,7 @@ import com.price.tracker.repository.PlaystationStoreInfoRepo;
 import com.price.tracker.vo.PstoreGameVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PlaystationStoreInfoTest extends BaseTest {
+public class PlaystationStoreGameInfoTest extends BaseTest {
     @Autowired
     private PlaystationStoreInfoFactory factory;
     @Autowired
@@ -21,7 +21,7 @@ public class PlaystationStoreInfoTest extends BaseTest {
     @Override
     public void deleteEntityTest() {
         PstoreGameVo pstoreVo = GameTestHelper.createPstoreVo();
-        PlaystationStoreInfo playstationStoreInfo =  factory.create(true, pstoreVo );
-        repo.delete(playstationStoreInfo);
+        PlaystationStoreGameInfo playstationGameStoreInfo =  factory.create(true, pstoreVo );
+        repo.delete(playstationGameStoreInfo);
     }
 }
