@@ -29,7 +29,7 @@ public class GameTest extends BaseTest {
     public void deleteEntityTest() {
 
         try {
-            Game game = gameFactory.create(true);
+            Game game = gameFactory.createToTest(true);
             repo.delete(game);
         }catch (Exception e) {
             fail("Fail on delete game: "+ e.getMessage());
