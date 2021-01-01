@@ -5,7 +5,7 @@ import com.price.tracker.repository.BaseRepo;
 
 public class ValidatorHelper {
 
-    public static   <T extends BaseEntity> T  validateAndSaveIfNecessary(T entity, Boolean save, BaseRepo<T> repo) {
+    public static   <T extends BaseEntity> T  validateAndSaveIfNecessary( Boolean save, T entity, BaseRepo<T> repo) {
 
         if(entity.validate() && save) {
             repo.save(entity);
