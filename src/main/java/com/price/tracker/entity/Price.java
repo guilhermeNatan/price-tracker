@@ -11,12 +11,14 @@ import javax.persistence.OneToOne;
 @Entity
 public class Price extends BaseEntity{
 
+   @NotNull
    @ManyToOne
    private Game game;
 
    @NotNull
    private Double value;
 
+   @NotNull
    @OneToOne
    private Store store;
 }

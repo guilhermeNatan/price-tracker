@@ -12,6 +12,6 @@ public class Store extends BaseEntity {
     private String name;
 
     @Length(max= 200)
-    private String url;
+    private String link;
 
 }
