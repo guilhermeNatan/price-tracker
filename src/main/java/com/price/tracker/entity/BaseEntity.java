@@ -52,4 +52,8 @@ public class BaseEntity implements Serializable {
     public LocalDate getLastUpdateInLocalDate ()  {
         return DateUtil.convertCalendarToLocalDate(getLastUpdate());
     }
+
+    public boolean validate() {
+        return true;
+    }
 }
