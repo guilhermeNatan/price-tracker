@@ -13,7 +13,7 @@ public class Game extends BaseEntity {
     private String name;
 
     @OneToOne(mappedBy = "game")
-    private PlaystationStoreInfo playstionStoreInfo;
+    private PlaystationStoreGameInfo playstionStoreInfo;
 
     @ManyToMany
     @JoinTable(
@@ -35,7 +35,7 @@ public class Game extends BaseEntity {
         platform.addGame(this);
     }
 
-    public void setPlaystionStoreInfo(PlaystationStoreInfo playstionStoreInfo) {
+    public void setPlaystionStoreInfo(PlaystationStoreGameInfo playstionStoreInfo) {
         playstionStoreInfo.setGame(this);
         this.playstionStoreInfo = playstionStoreInfo;
     }
