@@ -1,7 +1,9 @@
 package com.price.tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.price.tracker.reuse.util.CollectionHelper;
 import lombok.Data;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,7 +24,8 @@ public class Game extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "platform_id"))
     private List<Platform> platforms;
 
-    @OneToMany(mappedBy = "game")
+    @JsonIgnore
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     private List<Price> prices;
 
     public void addPrice(Price price) {

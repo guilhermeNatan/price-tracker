@@ -1,7 +1,7 @@
 package com.price.tracker.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.price.tracker.factory.GameFactory;
+import com.price.tracker.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,23 +17,23 @@ public class Scrab {
 
 
     @Autowired
-    private GameFactory gameFactory;
+    private GameService gameService;
 
     public void psStoreScrab(String url)  {
 
-        List<Thread> threads = Arrays.asList(new Thread(new PstoreParallelScrab(1, 10, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(11, 20, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(21, 30, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(31, 40, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(41, 50, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(51, 60, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(61, 70, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(71, 80, url, gameFactory)),
-                new Thread(new PstoreParallelScrab(81, 89, url, gameFactory))
+        List<Thread> threads = Arrays.asList(new Thread(new PstoreParallelScrab(1, 10, url, gameService)),
+                new Thread(new PstoreParallelScrab(11, 20, url, gameService)),
+                new Thread(new PstoreParallelScrab(21, 30, url, gameService)),
+                new Thread(new PstoreParallelScrab(31, 40, url, gameService)),
+                new Thread(new PstoreParallelScrab(41, 50, url, gameService)),
+                new Thread(new PstoreParallelScrab(51, 60, url, gameService)),
+                new Thread(new PstoreParallelScrab(61, 70, url, gameService)),
+                new Thread(new PstoreParallelScrab(71, 80, url, gameService)),
+                new Thread(new PstoreParallelScrab(81, 89, url, gameService))
         );
 
         threads.forEach(Thread::start);
-        while (!allThreadsIsDied(threads)) {}
+        while (!allThreadsIsDied(threads));
     }
 
     public  boolean allThreadsIsDied(List<Thread> threads) {

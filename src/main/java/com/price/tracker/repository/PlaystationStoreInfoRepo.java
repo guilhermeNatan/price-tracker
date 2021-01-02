@@ -5,4 +5,6 @@ import org.springframework.data.repository.cdi.Eager;
 
 @Eager
 public interface PlaystationStoreInfoRepo extends BaseRepo<PlaystationStoreGameInfo>{
+
+    PlaystationStoreGameInfo findByPlaystationStoreId(String psId);
 }

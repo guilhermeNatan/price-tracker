@@ -2,6 +2,7 @@ package com.price.tracker.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.price.tracker.factory.GameFactory;
+import com.price.tracker.service.GameService;
 import com.price.tracker.vo.PstoreGameVo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +21,13 @@ public class PstoreParallelScrab implements Runnable {
     private int endIndex;
     private String baseUrl;
     private  ObjectMapper mapper = new ObjectMapper();
-    private GameFactory gameFactory;
+    private GameService gameService;
 
-    public PstoreParallelScrab(int startIdex, int endIndex, String baseUrl, GameFactory gameFactory) {
+    public PstoreParallelScrab(int startIdex, int endIndex, String baseUrl, GameService gameService) {
         this.startIdex = startIdex;
         this.endIndex = endIndex;
         this.baseUrl = baseUrl;
-        this.gameFactory = gameFactory;
+        this.gameService = gameService;
     }
 
 
@@ -43,7 +44,7 @@ public class PstoreParallelScrab implements Runnable {
 
                 for(Element el : li) {
                     PstoreGameVo pstoreGameVo = mapper.readValue(el.attr("data-telemetry-meta"), PstoreGameVo.class);
-                    gameFactory.createPstoreGame(true, pstoreGameVo);
+                    gameService.updateOrCreatePstoreGame(pstoreGameVo);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
