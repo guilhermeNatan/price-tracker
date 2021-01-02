@@ -1,6 +1,7 @@
 package com.price.tracker.entity;
 
 
+import com.price.tracker.factory.GameFactory;
 import com.price.tracker.factory.PlaystationStoreInfoFactory;
 import com.price.tracker.repository.PlaystationStoreInfoRepo;
 import com.price.tracker.vo.PstoreGameVo;
@@ -12,16 +13,20 @@ public class PlaystationStoreGameInfoTest extends BaseTest {
     @Autowired
     private PlaystationStoreInfoRepo repo;
 
+    @Autowired
+    private GameFactory gameFactory;
     @Override
     public void createEntityTest() {
+        Game game = gameFactory.createToTest(true);
         PstoreGameVo pstoreVo = GameTestHelper.createPstoreVo();
-        factory.create(true, pstoreVo );
+        factory.create(true, pstoreVo,game );
     }
 
     @Override
     public void deleteEntityTest() {
+        Game game = gameFactory.createToTest(true);
         PstoreGameVo pstoreVo = GameTestHelper.createPstoreVo();
-        PlaystationStoreGameInfo playstationGameStoreInfo =  factory.create(true, pstoreVo );
+        PlaystationStoreGameInfo playstationGameStoreInfo =  factory.create(true, pstoreVo ,game);
         repo.delete(playstationGameStoreInfo);
     }
 }

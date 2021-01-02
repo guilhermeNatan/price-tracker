@@ -1,7 +1,9 @@
 package com.price.tracker.factory;
 
+import com.price.tracker.entity.Game;
 import com.price.tracker.entity.PlaystationStoreGameInfo;
 import com.price.tracker.repository.PlaystationStoreInfoRepo;
+import com.price.tracker.reuse.util.ValidatorHelper;
 import com.price.tracker.vo.PstoreGameVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,15 +22,13 @@ public class PlaystationStoreInfoFactory extends BaseFactory<PlaystationStoreGam
     }
 
 
-    public PlaystationStoreGameInfo create(boolean save, PstoreGameVo pstoreGameVo) {
-
+    public PlaystationStoreGameInfo create(boolean save, PstoreGameVo pstoreGameVo, Game game) {
         PlaystationStoreGameInfo psinfo = new PlaystationStoreGameInfo();
         psinfo.setPlaystionStoreIndex(pstoreGameVo.getIndex());
         psinfo.setPlaystationStoreId(pstoreGameVo.getId());
-        if(save) {
-          return   psInfoRepo.save(psinfo);
-        }
-        return psinfo;
+        psinfo.setPresentInPsplus(pstoreGameVo.isAPsplusGame());
+        game.setPlaystionStoreInfo(psinfo);
+        return ValidatorHelper.validateAndSaveIfNecessary(save, psinfo, psInfoRepo);
     }
 
 

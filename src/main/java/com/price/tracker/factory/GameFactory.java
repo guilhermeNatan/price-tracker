@@ -1,10 +1,9 @@
 package com.price.tracker.factory;
 
-import com.price.tracker.entity.Game;
-import com.price.tracker.entity.Platform;
-import com.price.tracker.entity.PlatformEnum;
-import com.price.tracker.entity.PlaystationStoreGameInfo;
+import com.price.tracker.entity.*;
 import com.price.tracker.repository.GameRepo;
+import com.price.tracker.repository.StoreRepo;
+import com.price.tracker.reuse.util.ValidatorHelper;
 import com.price.tracker.vo.PstoreGameVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,31 +20,30 @@ public class GameFactory extends BaseFactory<Game> {
     @Autowired
     private PlatformFactory platformFactory;
 
+    @Autowired
+    private PriceFactory priceFactory;
+
+    @Autowired
+    private StoreRepo storeRepo;
+
     @Override
     public Game createToTest(boolean save) {
         Game game = new Game();
         game.setName("The last of us");
-
-        if(save) {
-            return gameRepo.save(game);
-        }
-
-        return game;
+        return ValidatorHelper.validateAndSaveIfNecessary(save, game, gameRepo);
     }
 
     public Game createPstoreGame(boolean save , PstoreGameVo vo) {
         Game game = new Game();
         game.setName(vo.getName());
-        PlaystationStoreGameInfo psInfo = psStoreInfoFactory.create(save, vo);
-        game.setPlaystionStoreInfo(psInfo);
-
-
         Platform platform = platformFactory.create(save, PlatformEnum.PLAYSTATION_4);
         game.addPlatform(platform);
-        if(save) {
-            return gameRepo.save(game);
-        }
-
+        Store store = storeRepo.findStoreByCodigo(StoreEnum.PLAYSTATION_STORE);
+        ValidatorHelper.validateAndSaveIfNecessary(save, game, gameRepo);
+        PlaystationStoreGameInfo psInfo = psStoreInfoFactory.create(save, vo, game);
+        game.setPlaystionStoreInfo(psInfo);
+        priceFactory.create(save, game, store, vo.getPrice());
         return game;
     }
+
 }
