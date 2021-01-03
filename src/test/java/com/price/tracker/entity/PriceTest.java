@@ -6,6 +6,9 @@ import com.price.tracker.repository.PriceRepo;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Calendar;
+import java.util.Optional;
+
 public class PriceTest extends BaseTest {
     private  final Boolean SAVE = true;
 
@@ -36,5 +39,25 @@ public class PriceTest extends BaseTest {
         assertEquals(0.0, Price.convertValue(null));
         assertEquals(0.0, Price.convertValue(" "));
 
+    }
+
+    @Test
+    public void givenAPriceGameAndStoreFindits(){
+        Price price = priceFactory.createToTest(true);
+        Optional<Price> priceWrapper = repo.findByGameAndStoreAndAndCreateAt(price.getGame(),
+                price.getStore(), Calendar.getInstance());
+        assertTrue(priceWrapper.isPresent());
+    }
+
+    @Test
+    public void givenAPriceValueGameAndStore(){
+        Price price = priceFactory.createToTest(true);
+        Optional<Price> priceWrapper = repo.findFirstByGameAndStoreOrderByCreateAtDesc(price.getGame(),
+                price.getStore());
+        assertEquals(priceWrapper.get().getValue() , 20.0);
+        priceFactory.create(true, price.getGame(), price.getStore(), 15.0);
+        priceWrapper = repo.findFirstByGameAndStoreOrderByCreateAtDesc(price.getGame(),
+                price.getStore());
+        assertEquals(priceWrapper.get().getValue() , 15.0);
     }
 }
