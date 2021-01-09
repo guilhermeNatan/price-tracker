@@ -27,7 +27,9 @@ public class PlaystationStoreInfoFactory extends BaseFactory<PlaystationStoreGam
         psinfo.setPlaystionStoreIndex(pstoreGameVo.getIndex());
         psinfo.setPlaystationStoreId(pstoreGameVo.getId());
         psinfo.setPresentInPsplus(pstoreGameVo.isAPsplusGame());
+        psinfo.setAvalilable(pstoreGameVo.isAvailableGame());
         game.setPlaystionStoreInfo(psinfo);
+
         return ValidatorHelper.validateAndSaveIfNecessary(save, psinfo, psInfoRepo);
     }
 

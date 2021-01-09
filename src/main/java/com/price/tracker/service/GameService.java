@@ -7,13 +7,11 @@ import com.price.tracker.repository.GameRepo;
 import com.price.tracker.repository.PlaystationStoreInfoRepo;
 import com.price.tracker.repository.PriceRepo;
 import com.price.tracker.repository.StoreRepo;
-import com.price.tracker.reuse.util.DateUtil;
 import com.price.tracker.vo.PstoreGameVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
 import java.util.Optional;
 
 @Component
@@ -35,6 +33,9 @@ public class GameService extends BaseService<Game> {
     @Autowired
     private PriceRepo priceRepo;
 
+    @Autowired
+    private PlaystationStoreInfoRepo psStoreInfoRepo;
+
 
     @Override
     protected JpaRepository<Game, Long> getEntityRepository() {
@@ -50,10 +51,11 @@ public class GameService extends BaseService<Game> {
     }
 
     private void registerPricePstoreGame(Game game, Double value ) {
-        Store store = storeRepo.findStoreByCodigo(StoreEnum.PLAYSTATION_STORE);
-        Optional<Price> priceWrapper = priceRepo.findFirstByGameAndStoreOrderByCreateAtDesc(game, store);
+        Optional<Store> store = storeRepo.findFirstByCodigo(StoreEnum.PLAYSTATION_STORE);
+        Optional<Price> priceWrapper = priceRepo.findFirstByGameAndStoreOrderByCreateAtDesc(game,
+                store.get());
         if( registerPrice(priceWrapper, value) ){
-            priceFactory.create(true, game,store , value);
+            priceFactory.create(true, game,store.get() , value);
         }
     }
     private boolean registerPrice(Optional<Price> price, Double newValue ) {
@@ -61,13 +63,20 @@ public class GameService extends BaseService<Game> {
     }
 
     public void updateOrCreatePstoreGame(PstoreGameVo pstoreGameVo ) {
-        Optional<Game> gameWrapper = repo.findByPstoreId(pstoreGameVo.getId());
-        if(gameWrapper.isPresent()) {
-
-            this.registerPricePstoreGame(gameWrapper.get(), pstoreGameVo.getPrice());
-        }else {
-            this.createPstoreGame(pstoreGameVo);
+        if(pstoreGameVo.isAvailableGame()) {
+            Optional<Game> gameWrapper = repo.findByPstoreId(pstoreGameVo.getId());
+            if(gameWrapper.isPresent()) {
+                Game game = gameWrapper.get();
+                PlaystationStoreGameInfo psInfo = game.getPlaystionStoreInfo();
+                psInfo.setPresentInPsplus(pstoreGameVo.isAPsplusGame());
+                psInfo.setAvalilable(pstoreGameVo.isAvailableGame());
+                psStoreInfoRepo.save(psInfo);
+                this.registerPricePstoreGame(gameWrapper.get(), pstoreGameVo.getPriceValue());
+            }else {
+                this.createPstoreGame(pstoreGameVo);
+            }
         }
+
     }
 
 }

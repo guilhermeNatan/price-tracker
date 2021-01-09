@@ -12,7 +12,7 @@ public class PlaystationStoreGameInfo extends BaseGameInfo {
     private String playstationStoreId;
     private Integer playstionStoreIndex;
     private Boolean presentInPsplus;
-
+    private Boolean avalilable;
 
     @NotNull
     @OneToOne

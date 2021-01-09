@@ -7,6 +7,8 @@ import com.price.tracker.reuse.util.ValidatorHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class StoreFactory extends BaseFactory<Store> {
 
@@ -23,5 +25,13 @@ public class StoreFactory extends BaseFactory<Store> {
         store.setCodigo(codigo);
         store.setLink(url);
         return  ValidatorHelper.validateAndSaveIfNecessary(save, store, repo);
+    }
+
+    public Store createIfNotExist(boolean save, StoreEnum codigo, String url) {
+        Optional<Store> store = repo.findFirstByCodigo(codigo);
+        if(!store.isPresent()) {
+            return this.create(save, codigo, url);
+        }
+        return store.get();
     }
 }

@@ -8,6 +8,8 @@ import com.price.tracker.vo.PstoreGameVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class GameFactory extends BaseFactory<Game> {
 
@@ -38,12 +40,15 @@ public class GameFactory extends BaseFactory<Game> {
         game.setName(vo.getName());
         Platform platform = platformFactory.create(save, PlatformEnum.PLAYSTATION_4);
         game.addPlatform(platform);
-        Store store = storeRepo.findStoreByCodigo(StoreEnum.PLAYSTATION_STORE);
+        Optional<Store> store = storeRepo.findFirstByCodigo(StoreEnum.PLAYSTATION_STORE);
         ValidatorHelper.validateAndSaveIfNecessary(save, game, gameRepo);
         PlaystationStoreGameInfo psInfo = psStoreInfoFactory.create(save, vo, game);
         game.setPlaystionStoreInfo(psInfo);
-        priceFactory.create(save, game, store, vo.getPrice());
+        if(vo.isAvailableGame()) {
+            priceFactory.create(save, game, store.get(), vo.getPriceValue());
+        }
         return game;
+
     }
 
 }

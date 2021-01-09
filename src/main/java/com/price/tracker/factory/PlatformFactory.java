@@ -6,6 +6,8 @@ import com.price.tracker.repository.PlatformRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class PlatformFactory extends BaseFactory<Platform> {
     @Autowired
@@ -24,4 +26,10 @@ public class PlatformFactory extends BaseFactory<Platform> {
         }
         return platform;
     }
+    public Platform createIfNotExist(boolean save, PlatformEnum name) {
+        Optional<Platform> platformWrapper = platformRepo.findFirstByName(name);
+        return platformWrapper.orElseGet(() -> this.create(save, name));
+    }
+
+
 }
