@@ -1,0 +1,20 @@
+FROM openjdk:8-jdk-alpine
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+
+RUN apk --no-cache add curl
+VOLUME /tmp
+ENV JOGOBAIXO_MYSQL_DB_USERNAME=$DB_USERNAME
+ENV JOGOBAIXO_MYSQL_DB_PASSWORD=$DB_PASSWORD
+ENV JOGOBAIXO_MYSQL_URL=$DB_URL
+
+ARG REGION_ARG=us-east-1
+ARG ACCESS_ARG
+ARG SECRET_ARG
+ENV AWS_REGION=$REGION_ARG
+ENV AWS_ACCESS_KEY=$ACCESS_ARG
+ENV AWS_SECRET_KEY=$SECRET_ARG
+
+ARG JAR_FILE=target/tracker-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
