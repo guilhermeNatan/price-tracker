@@ -11,10 +11,16 @@ public class ScrabController {
     @Autowired
     private Scrab scrab;
 
-    @PostMapping
-    public ResponseEntity scrabPsStore(@RequestParam   String url) {
-        scrab.psStoreScrab(url);
-        return ResponseEntity.ok("Fim");
+//    @PostMapping
+//    public ResponseEntity scrabPsStore(@RequestParam   String url) {
+//        scrab.psStoreScrab(url);
+//        return ResponseEntity.ok("Fim");
+//    }
+
+
+    @GetMapping
+    public ResponseEntity scrabPsStore() {
+        return ResponseEntity.ok("Respondendo ... ");
     }
 
 }
