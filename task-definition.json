@@ -29,7 +29,7 @@
       "memoryReservation": 983,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "829361661681.dkr.ecr.us-east-1.amazonaws.com/jogojusto:2ead5963e55780bf1addfd8e01b5f84726b7f6fd",
+      "image": "829361661681.dkr.ecr.us-east-1.amazonaws.com/jogojusto:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -57,8 +57,8 @@
   "compatibilities": [
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:829361661681:task-definition/jogojusto-taskdefinition:4",
-  "family": "jogojusto-taskdefinition",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:829361661681:task-definition/jogojusto-taskdef:1",
+  "family": "jogojusto-taskdef",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -85,7 +85,7 @@
   ],
   "networkMode": "bridge",
   "cpu": null,
-  "revision": 4,
+  "revision": 1,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
