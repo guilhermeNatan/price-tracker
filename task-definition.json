@@ -43,10 +43,12 @@
       "pseudoTerminal": null,
       "user": null,
       "readonlyRootFilesystem": null,
-      "dockerLabels": null,
+      "dockerLabels": {
+        "projeto": "jogo-justo"
+      },
       "systemControls": null,
       "privileged": null,
-      "name": "jogojustocontainer"
+      "name": "jogo-justo-container"
     }
   ],
   "placementConstraints": [],
@@ -55,8 +57,8 @@
   "compatibilities": [
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:829361661681:task-definition/jogojusto-deploy:1",
-  "family": "jogojusto-deploy",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:829361661681:task-definition/jogojusto-taskdefinition:1",
+  "family": "jogojusto-taskdefinition",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -69,6 +71,12 @@
       "targetType": null,
       "value": null,
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
     }
   ],
   "pidMode": null,
