@@ -46,8 +46,8 @@ public class GameService extends BaseService<Game> {
     public void validateBeforeSave(Game entity) {
     }
 
-    public void createPstoreGame( PstoreGameVo pstoreGameVo ) {
-        gameFactory.createPstoreGame(true, pstoreGameVo);
+    public void createPstoreGame( PstoreGameVo pstoreGameVo, Platform platform, Store store ) {
+        gameFactory.createPstoreGame(true, pstoreGameVo, platform, store);
     }
 
     private void registerPricePstoreGame(Game game, Double value ) {
@@ -62,7 +62,7 @@ public class GameService extends BaseService<Game> {
         return !price.isPresent() || !price.get().getValue().equals(newValue);
     }
 
-    public void updateOrCreatePstoreGame(PstoreGameVo pstoreGameVo ) {
+    public void updateOrCreatePstoreGame(PstoreGameVo pstoreGameVo,  Platform platform, Store store ) {
         if(pstoreGameVo.isAvailableGame()) {
             Optional<Game> gameWrapper = repo.findByPstoreId(pstoreGameVo.getId());
             if(gameWrapper.isPresent()) {
@@ -73,7 +73,7 @@ public class GameService extends BaseService<Game> {
                 psStoreInfoRepo.save(psInfo);
                 this.registerPricePstoreGame(gameWrapper.get(), pstoreGameVo.getPriceValue());
             }else {
-                this.createPstoreGame(pstoreGameVo);
+                this.createPstoreGame(pstoreGameVo, platform, store);
             }
         }
 

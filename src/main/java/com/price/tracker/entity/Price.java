@@ -1,14 +1,16 @@
 package com.price.tracker.entity;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Price extends BaseEntity{
 

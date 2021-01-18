@@ -15,7 +15,7 @@ public class PlaystationStoreGameInfo extends BaseGameInfo {
     private Boolean avalilable;
 
     @NotNull
-    @OneToOne
+    @OneToOne(mappedBy = "playstionStoreInfo")
     private Game game;
 
 }

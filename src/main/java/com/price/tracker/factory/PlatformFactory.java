@@ -19,16 +19,16 @@ public class PlatformFactory extends BaseFactory<Platform> {
     }
 
     public Platform create(boolean save, PlatformEnum name) {
-        Platform platform = new Platform();
-        platform.setName(name);
-        if(save) {
-         return platformRepo.save(platform);
-        }
-        return platform;
-    }
-    public Platform createIfNotExist(boolean save, PlatformEnum name) {
         Optional<Platform> platformWrapper = platformRepo.findFirstByName(name);
-        return platformWrapper.orElseGet(() -> this.create(save, name));
+        if(!platformWrapper.isPresent()) {
+            Platform platform = new Platform();
+            platform.setName(name);
+            if(save) {
+                return platformRepo.save(platform);
+            }
+            return platform;
+        }
+        return platformWrapper.get();
     }
 
 

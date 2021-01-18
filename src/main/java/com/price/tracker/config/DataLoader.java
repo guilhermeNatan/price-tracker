@@ -20,8 +20,8 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         final Boolean SAVE = true;
-        platformFactory.createIfNotExist(SAVE, PlatformEnum.PLAYSTATION_4);
-        platformFactory.createIfNotExist(SAVE, PlatformEnum.PLAYSTATION_5);
-        storeFactory.createIfNotExist(SAVE, StoreEnum.PLAYSTATION_STORE, "https://store.playstation.com");
+        platformFactory.create(SAVE, PlatformEnum.PLAYSTATION_4);
+        platformFactory.create(SAVE, PlatformEnum.PLAYSTATION_5);
+        storeFactory.create(SAVE, StoreEnum.PLAYSTATION_STORE, "https://store.playstation.com");
     }
 }

@@ -20,7 +20,7 @@ public class PlatformTest  extends BaseTest{
 
     @Override
     public void deleteEntityTest() {
-        Platform platform = platformFactory.create(true, PlatformEnum.PLAYSTATION_4);
+        Platform platform = platformFactory.create(true, PlatformEnum.PLAYSTATION_5);
         platformRepo.delete(platform);
     }
 }

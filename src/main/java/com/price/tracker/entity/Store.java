@@ -1,12 +1,14 @@
 package com.price.tracker.entity;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Store extends BaseEntity {
 
