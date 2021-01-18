@@ -1,6 +1,7 @@
 package com.price.tracker.factory;
 
 import com.price.tracker.entity.*;
+import com.price.tracker.repository.GamePlatformRepo;
 import com.price.tracker.repository.GameRepo;
 import com.price.tracker.reuse.util.ValidatorHelper;
 import com.price.tracker.vo.PstoreGameVo;
@@ -20,6 +21,9 @@ public class GameFactory extends BaseFactory<Game> {
     @Autowired
     private PriceFactory priceFactory;
 
+    @Autowired
+    private GamePlatformRepo gamePlatformRepo;
+
 
 
     @Override
@@ -37,8 +41,8 @@ public class GameFactory extends BaseFactory<Game> {
             gamePlatform.setGame(game);
             gamePlatform.setPlatform(platform);
             game.addGamePlatform(gamePlatform);
-
             ValidatorHelper.validateAndSaveIfNecessary(save, game, gameRepo);
+            gamePlatformRepo.save(gamePlatform);
             PlaystationStoreGameInfo psInfo = psStoreInfoFactory.create(save, vo, game);
             game.setPlaystionStoreInfo(psInfo);
             if(vo.isAvailableGame()) {
