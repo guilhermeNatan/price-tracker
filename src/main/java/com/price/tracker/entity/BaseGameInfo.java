@@ -1,10 +1,12 @@
 package com.price.tracker.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
 
-@Data
+@Getter
+@Setter
 @MappedSuperclass
 public class BaseGameInfo extends BaseEntity {
     private String link;

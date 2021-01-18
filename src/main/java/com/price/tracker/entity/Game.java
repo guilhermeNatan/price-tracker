@@ -3,26 +3,26 @@ package com.price.tracker.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.price.tracker.reuse.util.CollectionHelper;
 import lombok.Data;
-import org.springframework.data.repository.cdi.Eager;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Game extends BaseEntity {
 
     private String name;
 
-    @OneToOne(mappedBy = "game")
+
+    @OneToOne
     private PlaystationStoreGameInfo playstionStoreInfo;
 
-    @ManyToMany
-    @JoinTable(
-            name = "game_platform",
-            joinColumns = @JoinColumn(name = "game_id"),
-            inverseJoinColumns = @JoinColumn(name = "platform_id"))
-    private List<Platform> platforms;
+    @OneToMany(mappedBy = "game",  fetch = FetchType.EAGER)
+    private Set<GamePlatform> gamePlatforms;
 
     @JsonIgnore
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
@@ -33,9 +33,9 @@ public class Game extends BaseEntity {
         price.setGame(this);
     }
 
-    public void addPlatform(Platform platform) {
-        getPlatforms().add(platform);
-        platform.addGame(this);
+    public void addGamePlatform(GamePlatform gamePlatform) {
+        getGamePlatforms().add(gamePlatform);
+        gamePlatform.setGame(this);
     }
 
     public void setPlaystionStoreInfo(PlaystationStoreGameInfo playstionStoreInfo) {
@@ -43,9 +43,9 @@ public class Game extends BaseEntity {
         this.playstionStoreInfo = playstionStoreInfo;
     }
 
-    public List<Platform> getPlatforms() {
-        platforms = CollectionHelper.instantiateListIfNecessary(platforms);
-        return platforms;
+    public Set<GamePlatform> getGamePlatforms() {
+        gamePlatforms = CollectionHelper.instantiateSetIfNecessary(gamePlatforms);
+        return gamePlatforms;
     }
 
     public List<Price> getPrices() {
