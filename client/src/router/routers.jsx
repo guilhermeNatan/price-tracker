@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/href-no-hash */
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
 import {applyMiddleware, createStore} from 'redux';
@@ -10,7 +9,7 @@ import {ToastContainer} from 'react-toastify';
 import Layout from '../layout/Layout';
 import reducers from '../reducers';
 import 'react-toastify/dist/ReactToastify.css';
-import Login from '../layout/pages/Login';
+import Login from '../layout/pages/Login/Login';
 
 const history = createBrowserHistory();
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
