@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import Rotas from './router/routers';
 
 ReactDOM.render(
-    <Rotas />,
+    <React.StrictMode>
+        <Rotas />
+    </React.StrictMode>,
   document.getElementById('root')
 );
 
