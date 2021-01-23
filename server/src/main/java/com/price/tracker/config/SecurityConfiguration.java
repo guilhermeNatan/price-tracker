@@ -1,11 +1,16 @@
 package com.price.tracker.config;
 
+import com.price.tracker.security.CustomUserDetailsService;
+import com.price.tracker.security.JwtAuthenticationEntryPoint;
+import com.price.tracker.security.JwtAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,6 +39,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
   @Value("${url-base}")
   private String urlBase;
 
+
+  @Autowired
+  private CustomUserDetailsService customUserDetailsService;
+
+  @Autowired
+  private JwtAuthenticationEntryPoint unauthorizedHandler;
+
+  /**
+   * @return {@link JwtAuthenticationFilter} .
+   */
+  @Bean
+  public JwtAuthenticationFilter jwtAuthenticationFilter()
+  {
+    return new JwtAuthenticationFilter();
+  }
+
   /**
    * Codificador de password  .
    * @return BCryptPasswordEncoder .
@@ -44,7 +65,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     return new BCryptPasswordEncoder();
   }
 
-
+  @Bean(BeanIds.AUTHENTICATION_MANAGER)
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception
+  {
+    return super.authenticationManagerBean();
+  }
+  @Override
+  public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
+  {
+    authenticationManagerBuilder
+            .userDetailsService(customUserDetailsService)
+            .passwordEncoder(passwordEncoder());
+  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception
