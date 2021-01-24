@@ -21,4 +21,8 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
+      env:
+        JOGOBAIXO_JWTSECRET: ${{ secrets.JOGOBAIXO_JWTSECRET }}
+        JOGOBAIXO_JWTEXPIRATIONINMS: ${{ secrets.JOGOBAIXO_JWTEXPIRATIONINMS }}
       run: mvn -B package --file server/pom.xml
+
