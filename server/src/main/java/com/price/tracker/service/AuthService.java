@@ -25,7 +25,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -120,7 +119,7 @@ public class AuthService
     cliente.setEmail(signUpRequest.getEmail());
     cliente.setNome(signUpRequest.getNome());
     cliente.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-    Role userRole = getRole(RoleName.ROLE_CLIENTE);
+    Role userRole = getRole(RoleName.ROLE_USER);
     cliente.adicionarRole(userRole);
     return clienteRepository.save(cliente);
   }

@@ -8,12 +8,8 @@ import lombok.Getter;
 public enum RoleName
 {
 
-  ROLE_ADMINISTRADOR("Administrador"),
-  ROLE_OPERADOR("Operador"),
-  ROLE_GERENTE("Gerente"),
-  ROLE_AUTOR("Autor"),
-
-  ROLE_CLIENTE("Cliente");
+  ROLE_ADMIN("Administrador"),
+  ROLE_USER("Usuário");
 
   @Getter
   private String descricao;
