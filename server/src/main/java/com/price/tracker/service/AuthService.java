@@ -3,7 +3,7 @@ package com.price.tracker.service;
 import com.price.tracker.controller.payload.ForgotPassword;
 import com.price.tracker.controller.payload.ResetPassword;
 import com.price.tracker.controller.payload.SignUpClientRequest;
-import com.price.tracker.entity.Cliente;
+import com.price.tracker.entity.User;
 import com.price.tracker.entity.Role;
 import com.price.tracker.entity.RoleName;
 import com.price.tracker.exception.Validar;
@@ -113,15 +113,15 @@ public class AuthService
    * @param signUpRequest {@link SignUpClientRequest}
    * @return um cliente cadastrado
    */
-  public Cliente criateCliente(SignUpClientRequest signUpRequest)
+  public User criateCliente(SignUpClientRequest signUpRequest)
   {
-    Cliente cliente = new Cliente();
-    cliente.setEmail(signUpRequest.getEmail());
-    cliente.setNome(signUpRequest.getNome());
-    cliente.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+    User user = new User();
+    user.setEmail(signUpRequest.getEmail());
+    user.setNome(signUpRequest.getNome());
+    user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
     Role userRole = getRole(RoleName.ROLE_USER);
-    cliente.adicionarRole(userRole);
-    return clienteRepository.save(cliente);
+    user.adicionarRole(userRole);
+    return clienteRepository.save(user);
   }
 
 
@@ -141,11 +141,11 @@ public class AuthService
   {
 
     String url;
-    Cliente cliente = clienteRepository.findByEmail(forgotPassword.getEmail()).orElse(null);
-    Validar.notNull(cliente, ERROR_USUARIO_NAO_CADASTRADO);
-    cliente.setResetToken(UUID.randomUUID().toString());
-    clienteRepository.save(cliente);
-    url = host + "#/reset-password/" + cliente.getResetToken();
+    User user = clienteRepository.findByEmail(forgotPassword.getEmail()).orElse(null);
+    Validar.notNull(user, ERROR_USUARIO_NAO_CADASTRADO);
+    user.setResetToken(UUID.randomUUID().toString());
+    clienteRepository.save(user);
+    url = host + "#/reset-password/" + user.getResetToken();
 //    EmailPojo email = EmailFactory.criarEmail(cliente, EmailSubject.RECUPERAR_SENHA, url,
 //      "recoverPasswordMail");
 //    emailService.prepareAndSendSimpleMail(email, mailContentBuilderRecoverPassword);
@@ -158,7 +158,7 @@ public class AuthService
    */
   public void resetPassword(ResetPassword resetPassword)
   {
-    Cliente user = clienteRepository.findByResetToken(resetPassword.getToken()).orElse(null);
+    User user = clienteRepository.findByResetToken(resetPassword.getToken()).orElse(null);
     Validar.notNull(user, ERRO_TOKEN_INVALIDO);
     user.setResetToken(null);
     user.setPassword(passwordEncoder.encode(resetPassword.getNewPassword()));

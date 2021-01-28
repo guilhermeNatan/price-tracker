@@ -1,18 +1,18 @@
 package com.price.tracker.repository;
 
-import com.price.tracker.entity.User;
+import com.price.tracker.entity.AbstractUser;
 import org.springframework.data.repository.NoRepositoryBean;
 
 
 import java.util.Optional;
 
 @NoRepositoryBean
-public interface UserRepository<T extends User> extends BaseRepo<T>
+public interface UserRepository<T extends AbstractUser> extends BaseRepo<T>
 {
 
   /**
    * @param email  e-mail .
-   * @return  {@link User} .
+   * @return  {@link AbstractUser} .
    */
   Optional<T> findByEmail(String email);
 

@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 })
 @Getter
 @Setter
-public class AdminUser extends User
+public class AdminUser extends AbstractUser
 {
 
   @NotBlank

@@ -1,8 +1,8 @@
 package com.price.tracker.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.price.tracker.entity.AbstractUser;
 import com.price.tracker.entity.AdminUser;
-import com.price.tracker.entity.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -56,11 +56,11 @@ public class UserPrincipal implements UserDetails
 
 
   /**
-   * Cria um UserPrincipal a partir de um {@link User} .
-   * @param user {@link User}
+   * Cria um UserPrincipal a partir de um {@link AbstractUser} .
+   * @param user {@link AbstractUser}
    * @return {@link UserPrincipal}
    */
-  public static UserPrincipal create(User user)
+  public static UserPrincipal create(AbstractUser user)
   {
     List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
       new SimpleGrantedAuthority(role.getName().name())

@@ -1,7 +1,7 @@
 package com.price.tracker.security;
 
+import com.price.tracker.entity.AbstractUser;
 import com.price.tracker.entity.AdminUser;
-import com.price.tracker.entity.Cliente;
 import com.price.tracker.entity.User;
 import com.price.tracker.repository.AdminUserRepository;
 import com.price.tracker.repository.ClienteRepository;
@@ -38,9 +38,9 @@ public class CustomUserDetailsService implements UserDetailsService
   public UserDetails loadUserByUsername(String userNameOrEmail)
     throws UsernameNotFoundException
   {
-    Cliente cliente = clienteRepository.findByEmail(userNameOrEmail).orElse(null);
-    if (cliente != null) {
-      return UserPrincipal.create(cliente);
+    User user = clienteRepository.findByEmail(userNameOrEmail).orElse(null);
+    if (user != null) {
+      return UserPrincipal.create(user);
     }
 
     AdminUser adminUser = adminUserUserRepository.findByUsername(userNameOrEmail).orElse(null);
@@ -64,7 +64,7 @@ public class CustomUserDetailsService implements UserDetailsService
     Long id;
     if (!idWithUserName.contains(JwtTokenProvider.ADMIN)) {
       id = Long.parseLong(idWithUserName);
-      User user = clienteRepository.findById(id).orElseThrow(() ->
+      AbstractUser user = clienteRepository.findById(id).orElseThrow(() ->
         new UsernameNotFoundException("Não foi encontrado nenhum cliente com o id : " +
           idWithUserName)
       );
