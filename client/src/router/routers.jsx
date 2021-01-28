@@ -10,6 +10,7 @@ import Layout from '../layout/Layout';
 import reducers from '../reducers';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from '../layout/pages/Login/Login';
+import Home from "../layout/pages/Home/Home";
 
 const history = createBrowserHistory();
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -38,6 +39,7 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 };
 
 const login = renderizarComLayoutLogin(Login);
+const home = renderizarComLayoutPadrao(Home);
 
 class Rotas extends Component {
   render() {
@@ -46,7 +48,8 @@ class Rotas extends Component {
         <BrowserRouter>
           <div>
             <Switch>
-              <Route exact path="/" component={login} />
+              <Route exact path="/" component={home} />
+              <Route exact path="/login" component={login} />
 
               <Route render={() => <div>Ops : página não encontrada</div>} />
             </Switch>

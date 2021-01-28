@@ -5,6 +5,8 @@ import CardHeader from '@material-ui/core/es/CardHeader';
 import CardContent from '@material-ui/core/es/CardContent';
 import { palette } from '../../Colors';
 import axios  from "../../../util/AxiosConfig";
+import {authEndpoints} from "../../../Endpoits";
+import {ACCESS_TOKEN} from "../../../Constants";
 
 const schema = {
     type: 'object',
@@ -53,16 +55,13 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        // firebase.auth().onAuthStateChanged((user) => {
-        //   if (user) {
-        //     const { history } = this.props;
-        //     return history.push('/contatos');
-        //   }
-        // });
+
     }
 
-    onSubmit = ({ formData }) => {
+    onSubmit = async ({ formData }) => {
         if (formData) {
+            let response = await axios.post(authEndpoints.signin, formData);
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
         }
     }
 
