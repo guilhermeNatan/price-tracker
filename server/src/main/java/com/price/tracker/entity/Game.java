@@ -21,6 +21,7 @@ public class Game extends BaseEntity {
     @OneToOne
     private PlaystationStoreGameInfo playstionStoreInfo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "game",  fetch = FetchType.EAGER)
     private Set<GamePlatform> gamePlatforms;
 

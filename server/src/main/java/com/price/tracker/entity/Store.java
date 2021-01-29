@@ -1,5 +1,6 @@
 package com.price.tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 @Entity
 public class Store extends BaseEntity {
 
+    @JsonIgnore
     @Length(max= 200)
     private String link;
 

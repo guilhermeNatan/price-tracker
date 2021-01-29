@@ -1,5 +1,6 @@
 package com.price.tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class Price extends BaseEntity{
 
    @NotNull
    @ManyToOne
+   @JsonIgnore
    private Game game;
 
    @NotNull
