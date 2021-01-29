@@ -17,4 +17,5 @@ public interface GameRepo extends BaseRepo<Game> {
     @Query("select g from Game g where g.name like %?1%  order by  g.name asc")
     Page<Game> findByName(String name, Pageable pageable);
 
+
 }

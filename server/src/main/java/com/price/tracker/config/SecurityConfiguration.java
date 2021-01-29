@@ -99,7 +99,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 
       .antMatchers(BARRA +urlBase+"/arquivo")
       .permitAll()
-      .antMatchers( "/api/auth/**")
+      .antMatchers( "/api/auth/**", "/api/public/**")
       .permitAll()
       .anyRequest()
       .authenticated();

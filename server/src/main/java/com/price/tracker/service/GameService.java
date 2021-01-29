@@ -9,6 +9,9 @@ import com.price.tracker.repository.PriceRepo;
 import com.price.tracker.repository.StoreRepo;
 import com.price.tracker.vo.PstoreGameVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +47,12 @@ public class GameService extends BaseService<Game> {
 
     @Override
     public void validateBeforeSave(Game entity) {
+    }
+
+
+    public Page<Game> findGameByName(Optional<String> name, Optional<Integer> page, Optional<String> sortBy) {
+        return repo.findByName(name.orElse("_"),  PageRequest.of(page.orElse(0),PAGINATION,
+                Sort.Direction.DESC, sortBy.orElse("name")));
     }
 
     public void createPstoreGame( PstoreGameVo pstoreGameVo, Platform platform, Store store ) {
