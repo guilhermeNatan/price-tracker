@@ -27,7 +27,7 @@ public class DataLoader implements ApplicationRunner {
         final Boolean SAVE = true;
         platformFactory.create(SAVE, PlatformEnum.PLAYSTATION_4);
         platformFactory.create(SAVE, PlatformEnum.PLAYSTATION_5);
-        storeFactory.create(SAVE, StoreEnum.PLAYSTATION_STORE, "https://store.playstation.com");
+        storeFactory.createIfNotExist(SAVE, StoreEnum.PLAYSTATION_STORE, "https://store.playstation.com");
         roleFactory.createIfNotExist(SAVE, RoleName.ROLE_USER);
     }
 }
