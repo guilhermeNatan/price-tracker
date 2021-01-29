@@ -8,7 +8,7 @@ public class PstoreGameVo {
     private static final String GRATUITO = "Gratuito";
     private static final String INCLUDE_PLUS = "Incluído";
     private static final String UNAVAILABLE =  "Unavailable";
-
+    private static final String INDISPONIVEL =  "Indisponível";
     private String id;
     private Integer index;
     private String name;
@@ -23,7 +23,7 @@ public class PstoreGameVo {
         return GRATUITO.equals(price);
     }
     public boolean isAvailableGame() {
-        return !UNAVAILABLE.equals(price);
+        return !UNAVAILABLE.equals(price) &&  !INDISPONIVEL.equals(price);
     }
     public Double getPriceValue() {
         if(isAFreeGame() || isAPsplusGame()) {
