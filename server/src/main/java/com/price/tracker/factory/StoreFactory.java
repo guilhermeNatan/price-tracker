@@ -29,9 +29,6 @@ public class StoreFactory extends BaseFactory<Store> {
 
     public Store createIfNotExist(boolean save, StoreEnum codigo, String url) {
         Optional<Store> store = repo.findFirstByCodigo(codigo);
-        if(!store.isPresent()) {
-            return this.create(save, codigo, url);
-        }
-        return store.get();
+        return store.orElseGet(() -> this.create(save, codigo, url));
     }
 }
