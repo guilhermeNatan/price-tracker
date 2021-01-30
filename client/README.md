@@ -1,70 +1,92 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Reactjs start 
 
-## Available Scripts
+Um projeto base para criação de projetos react js. 
 
-In the project directory, you can run:
+## Pré requisitos
 
-### `yarn start`
+## Como iniciar projeto 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+###Estrutura de diretórios do projeto 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+    ├── TemplateModule   
+    ├── actions #actions 
+    ├── layout
+    │ ├── colors
+    │ └── internal-layout
+    │     └── components
+    │         ├── Header
+    │         ├── MLink
+    │         └── Menu
+    ├── pages
+    │ ├── Login
+    │     └── components
+    │ └── Pesquisa
+    │     └── components
+    ├── reducers
+    ├── resources
+    │ └── css
+    ├── router
+    │   └── PrivateRoute
+    ├── service
+    └── theme
+```
 
-### `yarn test`
+1. **TemplateModule:** 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    Nesse diretório contêm a estrutura base utilizada pelos scripts para criação de páginas e componentes
 
-### `yarn build`
+1. **actions:** 
+    
+    Actions utilizada pela aplicação
+    
+1. **layout:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Nesse diretório  é definido a estrutura base para cada layout.  
+    
+    Aqui um layout é como um padrão de estrutura de estilo que a aplicação deve apresentar dado   um contexto que pode ser por exemplo layout da area de
+    gestão, layout acesso público,  layout tela de login ,etc. 
+    
+    3.1 **internal-layout:**
+    
+    Estrutura base de layout interno  após autenticação do usuário.
+    
+1. **pages**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+     Telas da aplicação , uma tela deve ser quebrada em vários componetes menores 
+     que devem ficar dentro do diretóriio _componets_  localizado dentro de seu diretório.
+     Uma tela deve concentrar a lógica de estado de seus componentes internos. 
+    
+1. **reducers**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    Reducers da aplicação 
 
-### `yarn eject`
+1. **resources**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    Recursos como imagens, css styles. 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **router** 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    Componte de rotas da aplicação, aquisão registradas as páginas para que possam 
+    ser acessadas via rota    exemplo se a página X deve ser acessada pela url 
+    localhost:8080/X  ela deve ser registrada nesse componente .
+    
+1. **service**
+    
+    Services devem implementar a lógica de acesso aos endpoints. 
+    
+1. **theme**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    Definições do thema da aplicação  , como cores primárias, tamanho de fontes, etc.   
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Scripts para criação de componentes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* **build_component.sh**
 
-### Code Splitting
+    Cria estrutura base de componente dentro de uma página 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* **build_module.sh**
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  Cria estrutura base de página dentro do diretório pages.  
