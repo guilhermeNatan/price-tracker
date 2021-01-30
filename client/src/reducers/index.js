@@ -1,11 +1,13 @@
 import {combineReducers} from 'redux';
-
+import isMobile from './isMobile';
 
 /**
  * @type {Reducer<S>}
  */
+
+
 const rootReducer = combineReducers({
-  simpleReducer: "simpleReducer",
+  isMobile: isMobile,
 });
 
 export default rootReducer;
