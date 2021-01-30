@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import styles from './PesquisaStyles';
+import styles from './SearchStyles';
 
-class PesquisaScreen extends Component {
+class SearchScreen extends Component {
   render() {
     return (
       <div style={styles.container}>
-        Pesquisa
+        Home screen
       </div>
     );
   }
 }
 
-export default PesquisaScreen;
+export default SearchScreen;

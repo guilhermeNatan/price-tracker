@@ -11,7 +11,7 @@ import reducers from '../reducers';
 import 'react-toastify/dist/ReactToastify.css';
 import { Login } from '../pages/Login';
 import {PrivateRoute} from "./PrivateRoute";
-import {PesquisaScreen} from "../pages/Pesquisa";
+import {SearchScreen} from "../pages/Search";
 import {FORMULARIO} from "./Paths";
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../theme';
@@ -42,7 +42,7 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 };
 
 const login = renderizarComLayoutLogin(Login);
-const pesquisa = renderizarComLayoutPadrao(PesquisaScreen)
+const pesquisa = renderizarComLayoutPadrao(SearchScreen)
 
 class Rotas extends Component {
   render() {
