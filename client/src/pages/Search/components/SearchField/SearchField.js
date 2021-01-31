@@ -15,7 +15,7 @@ class SearchField extends PureComponent {
   }
 
   render() {
-    const {onRequestSearch, classes} = this.props;
+    const {onRequestSearch, classes, onChangeSearch, makeSearch} = this.props;
     const {value} = this.state;
 
     return (
@@ -23,13 +23,15 @@ class SearchField extends PureComponent {
           <div style={styles.searchContainer}>
             <SearchBar
                 value={value}
-                onChange={(newValue) => this.setState({ value: newValue })}
-                onRequestSearch={() => onRequestSearch(value)}
+                onChange={onChangeSearch}
+                onRequestSearch={onRequestSearch}
             />
           </div>
         <div style={styles.searchButton}>
             <Button  variant="contained" color="primary" classes={{
-              root: classes.button }} >
+              root: classes.button }}
+                onClick={makeSearch}
+            >
               Pesquisar
             </Button>
           </div>
@@ -42,6 +44,8 @@ class SearchField extends PureComponent {
 
 SearchField.propTypes = {
   onRequestSearch: PropTypes.func,
+    onChangeSearch: PropTypes.func,
+    makeSearch: PropTypes.func,
 };
 
 SearchField.defaultProps = {
