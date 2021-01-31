@@ -18,7 +18,7 @@ class SearchScreen extends Component {
 
     onChangeSearch = (newValue) => this.setState({ searchValue: newValue })
 
-    makeSearch = async  () => {
+    doSearch = async  () => {
         const {searchValue} = this.state;
         this.setState({isLoading: true})
         const respo = await  axios.get(`${SEARCH_GAME}?name=${searchValue}`);
@@ -31,7 +31,9 @@ class SearchScreen extends Component {
         const {resultSearch, isLoading} = this.state;
     return (
       <div style={styles.container}>
-        <SearchField onChangeSearch={this.onChangeSearch } makeSearch={this.makeSearch}/>
+
+        <SearchField onChangeSearch={this.onChangeSearch } makeSearch={this.doSearch}
+                     onRequestSearch={this.doSearch}/>
         <ResultSearch data={resultSearch} isLoading={isLoading} />
       </div>
     );
