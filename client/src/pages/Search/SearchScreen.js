@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import styles from './SearchStyles';
+import {SearchField} from "./components/SearchField";
 
 class SearchScreen extends Component {
   render() {
     return (
       <div style={styles.container}>
-        Home screen
+        <SearchField />
+
       </div>
     );
   }
