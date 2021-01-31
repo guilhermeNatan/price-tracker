@@ -1,17 +1,17 @@
 export const styles = {
   container: {
-    flex: 1,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   searchContainer: {
-    flex: 4,
-    marginRight: '1vw'
+    flex: 6,
   },
   searchButton: {
-    flex: 1
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'flex-end'
   }
 
 };

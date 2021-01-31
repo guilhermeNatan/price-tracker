@@ -9,7 +9,10 @@ class SearchScreen extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            searchValue: ''
+            searchValue: '',
+            resultSearch:[],
+            isLoading: false,
+
         }
     }
 
@@ -17,16 +20,19 @@ class SearchScreen extends Component {
 
     makeSearch = async  () => {
         const {searchValue} = this.state;
+        this.setState({isLoading: true})
         const respo = await  axios.get(`${SEARCH_GAME}?name=${searchValue}`);
-        console.log(respo)
+        const {conteudo} = respo.data
+        this.setState({resultSearch: conteudo, isLoading: false})
 
     }
 
     render() {
+        const {resultSearch, isLoading} = this.state;
     return (
       <div style={styles.container}>
         <SearchField onChangeSearch={this.onChangeSearch } makeSearch={this.makeSearch}/>
-        <ResultSearch />
+        <ResultSearch data={resultSearch} isLoading={isLoading} />
       </div>
     );
   }
