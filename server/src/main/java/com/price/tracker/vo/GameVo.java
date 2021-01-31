@@ -4,16 +4,11 @@
 
 package com.price.tracker.vo;
 
-import com.price.tracker.entity.Price;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class GameVo {
     private String name;
-
-    private List<Price> prices = new ArrayList<>();
+    private Long id;
 
 }

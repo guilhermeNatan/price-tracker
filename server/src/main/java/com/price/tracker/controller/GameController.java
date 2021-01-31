@@ -40,7 +40,7 @@ public class GameController {
         searchResponseForm.getConteudo().addAll(gamePage.getContent().stream().map(game -> {
             GameVo gameVo = new GameVo();
             gameVo.setName(game.getName());
-            gameVo.getPrices().addAll(game.getPrices());
+            gameVo.setId(game.getId());
             return gameVo;
         }).collect(Collectors.toList()));
         return ResponseEntity.ok(searchResponseForm);
