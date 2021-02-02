@@ -1,2 +1,4 @@
-export const FORMULARIO = '/formulario';
-export const LOGIN = '/login';
+export const SEARCH = '/login';
+export const GAME_DETAIL = '/game-detail';
+
+

@@ -4,6 +4,8 @@ import {SearchField} from "./components/SearchField";
 import {ResultSearch} from "./components/ResultSearch";
 import axios from '../../config/AxiosConfig';
 import {SEARCH_GAME} from "../../constants/Endpoints";
+import {GAME_DETAIL} from "../../router/Paths";
+import { withRouter } from 'react-router-dom';
 
 class SearchScreen extends Component {
     constructor(props, context) {
@@ -27,6 +29,11 @@ class SearchScreen extends Component {
 
     }
 
+    onRowClick  = (e, rowData) => {
+        const {history} = this.props;
+        return history.push(`${GAME_DETAIL}/${rowData.id}`)
+    }
+
     render() {
         const {resultSearch, isLoading} = this.state;
     return (
@@ -34,10 +41,12 @@ class SearchScreen extends Component {
 
         <SearchField onChangeSearch={this.onChangeSearch } makeSearch={this.doSearch}
                      onRequestSearch={this.doSearch}/>
-        <ResultSearch data={resultSearch} isLoading={isLoading} />
+        <ResultSearch data={resultSearch} isLoading={isLoading}
+
+                      onRowClick={this.onRowClick}/>
       </div>
     );
   }
 }
 
-export default SearchScreen;
+export default withRouter(SearchScreen);

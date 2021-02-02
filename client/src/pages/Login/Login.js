@@ -4,7 +4,7 @@ import Card from '@material-ui/core/es/Card';
 import CardHeader from '@material-ui/core/es/CardHeader';
 import CardContent from '@material-ui/core/es/CardContent';
 import styles from './LoginStyle'
-import {FORMULARIO} from "../../router/Paths";
+import {SEARCH} from "../../router/Paths";
 const schema = {
   type: 'object',
   required: ['email', 'password'],
@@ -47,11 +47,11 @@ class Login extends Component {
     onSubmit = ({ formData }) => {
       const { history } = this.props;
       if (formData) {
-        return history.push(FORMULARIO)
+        return history.push(SEARCH)
         // ServiceUtil.tryLogin(formData)
         //   .then(() => {
         //     const { history } = this.props;
-        //     return history.push(FORMULARIO);
+        //     return history.push(SEARCH);
         //   })
         //   .catch((error) => {
         //     console.log(error.mensage);

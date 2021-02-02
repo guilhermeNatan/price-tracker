@@ -10,14 +10,16 @@ import '../resources/css/style.css';
 import reducers from '../reducers';
 import 'react-toastify/dist/ReactToastify.css';
 import { Login } from '../pages/Login';
-import {PrivateRoute} from "./PrivateRoute";
 import {SearchScreen} from "../pages/Search";
-import {FORMULARIO} from "./Paths";
+import {GameDetailScreen} from "../pages/GameDetail";
+import {GAME_DETAIL, SEARCH} from "./Paths";
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../theme';
+
+
+
 const history = createBrowserHistory();
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
-
 const renderizarComLayoutPadrao = Componente => props => (
   <InternalLayout>
     <Componente
@@ -43,6 +45,7 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 
 const login = renderizarComLayoutLogin(Login);
 const pesquisa = renderizarComLayoutPadrao(SearchScreen)
+const gameDetail = renderizarComLayoutPadrao(GameDetailScreen)
 
 class Rotas extends Component {
   render() {
@@ -52,8 +55,11 @@ class Rotas extends Component {
               <BrowserRouter>
                 <div>
                   <Switch>
-                    <Route exact path="/" component={login} />
-                    <Route path={FORMULARIO} component={pesquisa} />
+                      <Route exact path="/" component={pesquisa}/>
+                      <Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>
+                      <Route exact path={SEARCH} component={login}/>
+
+
                     <Route render={() => <div>Ops : página não encontrada</div>} />
                   </Switch>
                   <ToastContainer />

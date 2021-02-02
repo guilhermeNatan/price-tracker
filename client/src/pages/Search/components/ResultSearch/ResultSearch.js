@@ -6,7 +6,7 @@ import MaterialTable from 'material-table';
 class ResultSearch extends PureComponent {
 
   render() {
-    const {data, isLoading} = this.props;
+    const {data, isLoading, onRowClick} = this.props;
 
     return (
       <div style={styles.container}>
@@ -22,6 +22,7 @@ class ResultSearch extends PureComponent {
             ]}
             data={data}
             isLoading={isLoading}
+            onRowClick={onRowClick}
         />
       </div>
     );
