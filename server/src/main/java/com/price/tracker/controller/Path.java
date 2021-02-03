@@ -10,4 +10,5 @@ public class Path {
 
     public static final String GAMES = PUBLIC_PATH+"games";
     public static final String GAMES_SEARCH = "/search";
+    public static final String GAME_DETAIL = "/detail";
 }

@@ -7,6 +7,7 @@ package com.price.tracker.controller;
 import com.price.tracker.controller.payload.SearchResponse;
 import com.price.tracker.entity.Game;
 import com.price.tracker.service.GameService;
+import com.price.tracker.vo.GameDetailVo;
 import com.price.tracker.vo.GameVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,5 +45,15 @@ public class GameController {
             return gameVo;
         }).collect(Collectors.toList()));
         return ResponseEntity.ok(searchResponseForm);
+    }
+
+    @GetMapping(Path.GAME_DETAIL)
+    public ResponseEntity find(@RequestParam Long gameId) {
+        Game game = gameService.findOne(gameId);
+        GameDetailVo gameDetailVo = new GameDetailVo();
+        gameDetailVo.setName(game.getName());
+        gameDetailVo.setId(gameId);
+        gameDetailVo.getPrices().addAll(game.getPrices());
+        return ResponseEntity.ok(gameDetailVo);
     }
 }
