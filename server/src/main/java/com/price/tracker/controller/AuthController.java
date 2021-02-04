@@ -16,18 +16,17 @@ import javax.validation.Valid;
  * Esta controller fornece metodos para login ou criação de um novo usuário .
  */
 @RestController
-@RequestMapping("${url-base}/api/auth")
+@RequestMapping(Path.Auth.AUTH)
 public class AuthController
 {
 
   @Autowired
   private AuthService authService;
 
-
   /**
    * @return Representação do JWT .
    */
-  @PostMapping("/signin")
+  @PostMapping(Path.Auth.SIGNIN)
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest)
   {
     Authentication authentication = authService.getAuthentication(loginRequest.getUsernameOrEmail(),
@@ -40,7 +39,7 @@ public class AuthController
    * @param signUpClientRequest {@link SignUpRequest} .
    * @return Pagina de usuários .
    */
-  @PostMapping("/signup")
+  @PostMapping(Path.Auth.SIGNUP)
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpClientRequest signUpClientRequest)
   {
     authService.validateExists(signUpClientRequest);
@@ -56,7 +55,7 @@ public class AuthController
    * @param forgotPassword payload {@link ForgotPassword}
    * @return ResponseEntity .
    */
-  @PostMapping("/forgotpassword")
+  @PostMapping(Path.Auth.FORGOTPASSWORD)
   public ResponseEntity<?> forgotPasswordLeitor(@Valid @RequestBody ForgotPassword forgotPassword)
   {
     authService.sendEmailRecoverPassword(forgotPassword);
@@ -67,7 +66,7 @@ public class AuthController
    * Altera a senha do usuário .
    * @return ResponseEntity .
    */
-  @PostMapping("/resetpassword")
+  @PostMapping(Path.Auth.RESETPASSWORD)
   public ResponseEntity<?> resetPasswordLeitor(@Valid @RequestBody ResetPassword resetPassword)
   {
     authService.resetPassword(resetPassword);

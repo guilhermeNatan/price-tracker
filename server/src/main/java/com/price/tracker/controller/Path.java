@@ -4,11 +4,19 @@
 
 package com.price.tracker.controller;
 
-public class Path {
-    private static final String BASE_PATH = "/api/";
-    private static final String PUBLIC_PATH = BASE_PATH +"public/";
+public interface Path {
+    String BASE_PATH = "/api/";
+    String PUBLIC_PATH = BASE_PATH + "public/";
 
-    public static final String GAMES = PUBLIC_PATH+"games";
-    public static final String GAMES_SEARCH = "/search";
-    public static final String GAME_DETAIL = "/detail";
+    String GAMES = PUBLIC_PATH + "games";
+    String GAMES_SEARCH = "/search";
+    String GAME_DETAIL = "/detail";
+
+    interface  Auth {
+        String AUTH = Path.PUBLIC_PATH   + "auth";
+        String SIGNIN =  "/signin";
+        String SIGNUP  =  "/signup";
+        String FORGOTPASSWORD  =  "/forgotpassword";
+        String RESETPASSWORD  =  "/resetpassword";
+    }
 }
