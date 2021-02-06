@@ -1,5 +1,6 @@
 package com.price.tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.price.tracker.reuse.util.DateUtil;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @Version
     @ColumnDefault(value = "0")
     private Long version;
@@ -42,11 +44,13 @@ public class BaseEntity implements Serializable {
     private Calendar lastUpdate;
 
 
+    @JsonIgnore
     @Transient
     public LocalDate getCreateAtInLocalDate()  {
        return DateUtil.convertCalendarToLocalDate(getCreateAt());
     }
 
+    @JsonIgnore
     @Transient
     public LocalDate getLastUpdateInLocalDate ()  {
         return DateUtil.convertCalendarToLocalDate(getLastUpdate());
