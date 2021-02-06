@@ -10,6 +10,12 @@ import com.price.tracker.exception.Validar;
 import com.price.tracker.repository.ClienteRepository;
 import com.price.tracker.repository.RoleRepository;
 import com.price.tracker.security.JwtTokenProvider;
+import com.price.tracker.service.email.EmailFactory;
+import com.price.tracker.service.email.EmailPojo;
+import com.price.tracker.service.email.EmailService;
+import com.price.tracker.service.email.EmailSubject;
+import com.price.tracker.service.email.builders.MailContentBuilderRecoverPassword;
+import com.price.tracker.service.email.builders.MailToConfirmMailAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -64,11 +70,14 @@ public class AuthService
   @Autowired
   private JwtTokenProvider tokenProvider;
 
-//  @Autowired
-//  private EmailService emailService;
+  @Autowired
+  private EmailService emailService;
 
-//  @Autowired
-//  private MailContentBuilderRecoverPassword mailContentBuilderRecoverPassword;
+  @Autowired
+  private MailContentBuilderRecoverPassword mailContentBuilderRecoverPassword;
+
+  @Autowired
+  private MailToConfirmMailAddress mailToConfirmMailAddress;
 
   @Value("${host}")
   private String host;
@@ -155,9 +164,9 @@ public class AuthService
     user.setResetToken(UUID.randomUUID().toString());
     clienteRepository.save(user);
     url = host + "#/reset-password/" + user.getResetToken();
-//    EmailPojo email = EmailFactory.criarEmail(cliente, EmailSubject.RECUPERAR_SENHA, url,
-//      "recoverPasswordMail");
-//    emailService.prepareAndSendSimpleMail(email, mailContentBuilderRecoverPassword);
+    EmailPojo email = EmailFactory.criarEmail(user, EmailSubject.RECUPERAR_SENHA, url,
+      "recoverPasswordMail");
+    emailService.prepareAndSendSimpleMail(email, mailContentBuilderRecoverPassword);
   }
 
   /**
