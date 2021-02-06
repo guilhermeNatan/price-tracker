@@ -39,15 +39,14 @@ public class AuthService
   /**
    * Regra de acesso inválida.
    */
-  public static final String ERROR_REGRADAACESSOINVALIDA = "Error.regradaacessoinvalida";
+  public static final String ERROR_REGRADAACESSOINVALIDA = "error.auth.regradaacessoinvalida";
   /**
    * Exceção lançada quando já existe um usuário na base de dados cadastrado como mesmo
    * username(administradores) ou  e-mail(clientes).
    */
-  public static final String ERROR_USUARIO_JA_CADASTRADO = "Error.usuarioJaCadastrado";
-  private static final String ERROR_USUARIO_NAO_CADASTRADO = "Error.usuarioNaoCadastrado";
-  private static final String ERRO_TOKEN_INVALIDO = "Error.tokenInvalido";
-  private static final String ERRO_DATA_NASCIMENTO_IGUAL_ATUAL = "Erro.dataNascimentoIgualAtual";
+  public static final String ERROR_USUARIO_JA_CADASTRADO = "error.auth.usuarioJaCadastrado";
+  private static final String ERROR_USUARIO_NAO_CADASTRADO = "error.auth.usuarioNaoCadastrado";
+  private static final String ERRO_TOKEN_INVALIDO = "error.auth.tokenInvalido";
 
 
   @Autowired
@@ -82,7 +81,7 @@ public class AuthService
   public void validateExists(@Valid @RequestBody SignUpClientRequest signUpClientRequest)
   {
     Validar.isFalse(clienteRepository.existsByEmail(signUpClientRequest.getEmail()),
-      ERROR_USUARIO_JA_CADASTRADO, "email");
+      ERROR_USUARIO_JA_CADASTRADO, "e-mail");
   }
 
 
@@ -121,7 +120,17 @@ public class AuthService
     user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
     Role userRole = getRole(RoleName.ROLE_USER);
     user.adicionarRole(userRole);
-    return clienteRepository.save(user);
+    user.setConfirmEmailToken(UUID.randomUUID().toString());
+    User userSaved = clienteRepository.save(user);
+    sendEmailToConfirmEmail(userSaved);
+    return userSaved;
+  }
+
+  private void sendEmailToConfirmEmail(User user) {
+    String url = host + "#/confirm-email/" + user.getResetToken();
+    EmailPojo email = EmailFactory.criarEmail(user, EmailSubject.CONFIRMACAO_EMAIL, url,
+            "confirmMail");
+    emailService.prepareAndSendSimpleMail(email, mailToConfirmMailAddress);
   }
 
 
