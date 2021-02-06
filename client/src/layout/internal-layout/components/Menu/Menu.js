@@ -32,35 +32,10 @@ class Menu extends Component {
           <div className={classes.toolbar} />
           <List>
 
-            <MLink to="/noticias">
+            <MLink to="/">
               <ListItem button key="atendimento">
                 <ListItemIcon>{<LibraryBooksIcon />}</ListItemIcon>
-                <ListItemText primary="Notícias" />
-              </ListItem>
-            </MLink>
-            <MLink to="/anuncios">
-              <ListItem button key="anuncios">
-                <ListItemIcon>{<TrendingUpIcon />}</ListItemIcon>
-                <ListItemText primary="Anuncios" />
-              </ListItem>
-            </MLink>
-            <MLink to="/contatos">
-              <ListItem button key="contatos">
-                <ListItemIcon>{<PermPhoneMsgIcon />}</ListItemIcon>
-                <ListItemText primary="Contatos" />
-              </ListItem>
-            </MLink>
-            <MLink to="/notificacoes">
-              <ListItem button key="notificacoes">
-                <ListItemIcon>{<Notifications />}</ListItemIcon>
-                <ListItemText primary="Enviar notificação" />
-              </ListItem>
-            </MLink>
-
-            <MLink to="/img_upload">
-              <ListItem button key="img_upload">
-                <ListItemIcon>{<NewReleases />}</ListItemIcon>
-                <ListItemText primary="Upload de imagens" />
+                <ListItemText primary="Home" />
               </ListItem>
             </MLink>
           </List>
