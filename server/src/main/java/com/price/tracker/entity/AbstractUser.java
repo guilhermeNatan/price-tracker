@@ -31,6 +31,11 @@ public  abstract class  AbstractUser  extends BaseEntity {
     @Size(max = 100)
     private String password;
 
+    private  boolean active;
+
+    @Size(max = 120)
+    private String confirmEmailToken;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
