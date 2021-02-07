@@ -12,7 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Login } from '../pages/Login';
 import {SearchScreen} from "../pages/Search";
 import {GameDetailScreen} from "../pages/GameDetail";
-import {GAME_DETAIL, SEARCH} from "./Paths";
+import { ConfirmEmailScreen } from "../pages/ConfirmEmail";
+import {GAME_DETAIL, SEARCH, AUTH} from "../constants/RoutePaths";
 import { ThemeProvider } from '@material-ui/core';
 import theme from '../theme';
 
@@ -44,8 +45,9 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 };
 
 const login = renderizarComLayoutLogin(Login);
-const pesquisa = renderizarComLayoutPadrao(SearchScreen)
-const gameDetail = renderizarComLayoutPadrao(GameDetailScreen)
+const pesquisa = renderizarComLayoutPadrao(SearchScreen);
+const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
+const confirmEmail = renderizarComLayoutPadrao(ConfirmEmailScreen);
 
 class Rotas extends Component {
   render() {
@@ -58,7 +60,7 @@ class Rotas extends Component {
                       <Route exact path="/" component={pesquisa}/>
                       <Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>
                       <Route exact path={SEARCH} component={login}/>
-
+                      <Route exact path={`${AUTH.confirmEmail}/:confirmEmailToken`} component={confirmEmail}/>
 
                     <Route render={() => <div>Ops : página não encontrada</div>} />
                   </Switch>
