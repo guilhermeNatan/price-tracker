@@ -4,7 +4,7 @@ import {SearchField} from "./components/SearchField";
 import {ResultSearch} from "./components/ResultSearch";
 import axios from '../../config/AxiosConfig';
 import {SEARCH_GAME} from "../../constants/Endpoints";
-import {GAME_DETAIL} from "../../router/Paths";
+import {GAME_DETAIL} from "../../constants/RoutePaths";
 import { withRouter } from 'react-router-dom';
 
 class SearchScreen extends Component {

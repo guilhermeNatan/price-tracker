@@ -10,5 +10,7 @@ export const AUTH = {
     signin: `${baseURL}/auth/signin`,
     signup: `${baseURL}/auth/signup`,
     forgotpassword: `${baseURL}/auth/forgotpassword`,
-    resetpassword: `${baseURL}/auth/resetpassword`
+    resetpassword: `${baseURL}/auth/resetpassword`,
+    confirmAddressEmaill: `${baseURL}/auth/validate-email-address`
+
 }
