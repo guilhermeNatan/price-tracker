@@ -28,4 +28,7 @@ public interface UserRepository<T extends AbstractUser> extends BaseRepo<T>
    * @return usuário .
    */
   Optional<T> findByResetToken(String resetToken);
+
+
+  Optional<T> findByConfirmEmailToken(String token);
 }

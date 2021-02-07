@@ -18,5 +18,6 @@ public interface Path {
         String SIGNUP  =  "/signup";
         String FORGOTPASSWORD  =  "/forgotpassword";
         String RESETPASSWORD  =  "/resetpassword";
+        String VALIDATE_EMAIL_ADDRESS =  "/validate-email-address";
     }
 }

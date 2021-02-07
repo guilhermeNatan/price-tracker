@@ -5,10 +5,7 @@ import com.price.tracker.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -43,7 +40,7 @@ public class AuthController
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpClientRequest signUpClientRequest)
   {
     authService.validateExists(signUpClientRequest);
-    authService.criateCliente(signUpClientRequest);
+    authService.createUser(signUpClientRequest);
     Authentication authentication = authService.getAuthentication(signUpClientRequest.getEmail(),
       signUpClientRequest.getPassword());
     String jwt = authService.getJasonWebToken(authentication);
@@ -73,4 +70,14 @@ public class AuthController
     return ResponseEntity.ok(new ApiResponse(true, "Senha alterada com sucesso"));
   }
 
+  /**
+   * Altera a senha do usuário .
+   * @return ResponseEntity .
+   */
+  @GetMapping(Path.Auth.VALIDATE_EMAIL_ADDRESS)
+  public ResponseEntity<?> validateEmailAddress(@RequestParam String token)
+  {
+    authService.validateEmailPassword(token);
+    return ResponseEntity.ok(new ApiResponse(true, "E-mail confirmado com sucesso"));
+  }
 }

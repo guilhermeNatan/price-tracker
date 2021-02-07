@@ -3,9 +3,9 @@ package com.price.tracker.service;
 import com.price.tracker.controller.payload.ForgotPassword;
 import com.price.tracker.controller.payload.ResetPassword;
 import com.price.tracker.controller.payload.SignUpClientRequest;
-import com.price.tracker.entity.User;
 import com.price.tracker.entity.Role;
 import com.price.tracker.entity.RoleName;
+import com.price.tracker.entity.User;
 import com.price.tracker.exception.Validar;
 import com.price.tracker.repository.ClienteRepository;
 import com.price.tracker.repository.RoleRepository;
@@ -121,7 +121,7 @@ public class AuthService
    * @param signUpRequest {@link SignUpClientRequest}
    * @return um cliente cadastrado
    */
-  public User criateCliente(SignUpClientRequest signUpRequest)
+  public User createUser(SignUpClientRequest signUpRequest)
   {
     User user = new User();
     user.setEmail(signUpRequest.getEmail());
@@ -136,7 +136,7 @@ public class AuthService
   }
 
   private void sendEmailToConfirmEmail(User user) {
-    String url = host + "#/confirm-email/" + user.getResetToken();
+    String url =  host + "validate-email/" + user.getConfirmEmailToken();
     EmailPojo email = EmailFactory.criarEmail(user, EmailSubject.CONFIRMACAO_EMAIL, url,
             "confirmMail");
     emailService.prepareAndSendSimpleMail(email, mailToConfirmMailAddress);
@@ -180,6 +180,14 @@ public class AuthService
     Validar.notNull(user, ERRO_TOKEN_INVALIDO);
     user.setResetToken(null);
     user.setPassword(passwordEncoder.encode(resetPassword.getNewPassword()));
+    clienteRepository.save(user);
+  }
+
+  public void validateEmailPassword(String validadeEmailToken) {
+    User user = clienteRepository.findByConfirmEmailToken(validadeEmailToken).orElse(null);
+    Validar.notNull(user, ERRO_TOKEN_INVALIDO);
+    user.setConfirmEmailToken(null);
+    user.setActive(true);
     clienteRepository.save(user);
   }
 }
