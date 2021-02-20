@@ -20,26 +20,27 @@ class GameDetailScreen extends Component {
               </div>
 
 
-          <div style={{minHeight: '46vh' , width: '100%', display: "flex",
-              justifyContent: 'flex-start' ,alignItems: 'flex-end'}}>
+          <div style={styles.title}>
 
 
-              <Typography variant="h1" color="inherit" component="p" noWrap>
+              <Typography variant="h1"  align={'right'}>
                   { 'Prince of Persia: The Sands of Time Remake'}
               </Typography>
 
           </div>
-          <Button  variant="contained" color="secondary"
-                   onClick={() => console.log('notificar')}
-          >
-              Receber alerta
-          </Button>
+          <div style={styles.buttonRow}>
+              <Button
 
+                  variant="contained" color="secondary"
+                       onClick={() => console.log('notificar')}
+              >
+                  Receber alerta
+              </Button>
+          </div>
           <div style={{marginTop: '3vh'}}>
-              <Typography variant="h3" color="inherit" component="p" noWrap>
+              <Typography variant="h3" align={'right'} >
                   { 'Prince History'}
               </Typography>
-
 
           </div>
           <PriceChart />

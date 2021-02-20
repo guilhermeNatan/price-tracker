@@ -34,7 +34,7 @@ class PriceChart extends PureComponent {
     return (
       <div style={styles.container}>
         <Line data={data}   width={'60vw'}
-              height={'10vh'} />
+              height={'50vh'} />
       </div>
     );
   }

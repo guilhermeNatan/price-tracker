@@ -1,6 +1,7 @@
 import { createMuiTheme, colors } from '@material-ui/core';
 import shadows from './shadows';
 import typography from './typography';
+import Verify from "../util/Verify";
 
 //https://www.youtube.com/watch?v=mu8-u7V7Z8s&ab_channel=Headway
 const theme = createMuiTheme({
@@ -29,6 +30,9 @@ const theme = createMuiTheme({
 theme.props = {
     MuiButton: {
         disableElevation: true,
+    },
+    MuiTypography: {
+        color: 'textPrimary'
     }
 }
 theme.overrides = {
@@ -48,6 +52,27 @@ theme.overrides = {
         containedSecondary: {
             color: 'white'
         }
+    },
+    MuiTypography: {
+        h1: {
+            fontSize: '29px'
+        },
+        h2: {
+            fontSize: '24px'
+        },
+        h3: {
+            fontSize: '20px'
+        },
+        h4: {
+            fontSize: '16px'
+        },
+        h5: {
+            fontSize: '14px'
+        },
+        h6: {
+            fontSize: '12px'
+        }
     }
+
 }
 export default theme;
