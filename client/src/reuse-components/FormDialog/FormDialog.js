@@ -47,7 +47,7 @@ function FormDialog({ mainButtonName="FormDialog", confirmButtonName="Submit", c
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={handleClose} color="primary">
-                            {confirmButtonName}
+                            {cancelableButtonName}
                         </Button>
                         <Button type="submit" color="primary" autoFocus>
                             {confirmButtonName}
