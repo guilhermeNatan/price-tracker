@@ -50,7 +50,7 @@ function FormDialog({ mainButtonName="FormDialog", confirmButtonName="Submit", c
                             {confirmButtonName}
                         </Button>
                         <Button type="submit" color="primary" autoFocus>
-                            {cancelableButtonName}
+                            {confirmButtonName}
                         </Button>
                     </DialogActions>
 
