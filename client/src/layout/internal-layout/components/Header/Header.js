@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import Typography from '@material-ui/core/Typography';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
-import Button from "@material-ui/core/Button";
-import {SimpleDialog} from "../../../../reuse-components/SimpleDialog";
 import {LoginForm} from "../../../../reuse-components/LoginForm";
-import {SignUpForm} from "../../../../reuse-components/SignUpForm";
+import {FormDialog} from "../../../../reuse-components/FormDialog";
+import SignUpFormFieldsSpecifications, {signupRequest} from "../../../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
+import {SignUpFormFields} from "../../../../reuse-components/SignUpFormFields";
+import LoginFormFieldsSpecifications
+  , {loginRequest} from "../../../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
+
 
 class Header extends Component {
   render() {
@@ -29,13 +32,19 @@ class Header extends Component {
             { 'Bem vindo ao Jogo Justo'}
           </Typography>
 
-          <SimpleDialog buttonName={"Login" } title={"Faça login"}>
-            <LoginForm />
-          </SimpleDialog>
+          <FormDialog
+              mainButtonName={"Login"}
+              title={"Login"}
+              formikOptions={LoginFormFieldsSpecifications(loginRequest())}
+              renderContent={(formik) => <LoginForm formik={formik}/>}
+          />
 
-          <SimpleDialog buttonName={"Sign up" } title={"Cadastre-se"}>
-            <SignUpForm />
-          </SimpleDialog>
+          <FormDialog
+              mainButtonName={"Cadastre-se"}
+              title={"Cadastre-se"}
+              formikOptions={SignUpFormFieldsSpecifications(signupRequest())}
+              renderContent={(formik) => <SignUpFormFields formik={formik}/>}
+          />
         </Toolbar>
       </AppBar>
     );
