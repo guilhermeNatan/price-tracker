@@ -23,8 +23,8 @@ function FormDialog({ mainButtonName="FormDialog", confirmButtonName="Submit", c
         setOpen(false);
     };
 
-    const handleSubmit = (values, actions) => {
-        formikOptions.onSubmit(values, actions, handleClose);
+    const handleSubmit = (values) => {
+        formikOptions.onSubmit(values,  handleClose);
     }
 
     const formik = useFormik({

@@ -18,14 +18,6 @@ const validationSchema = yup.object({
 });
 
 
-export const loginRequest = async  (values, actions, onSuccess, onError) => {
-    try{
-        const respo = await  axios.post(`${AUTH.signin}`, values);
-        onSuccess && onSuccess(respo);
-    }catch (error) {
-        onError &&  onError(error)
-    }
-}
 export default {
     initialValues: {
         usernameOrEmail: '',

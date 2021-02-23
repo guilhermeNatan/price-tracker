@@ -1,4 +1,5 @@
-import { isNil, omitBy } from 'lodash';
+import {isNil, omitBy} from 'lodash';
+import axios from "../config/AxiosConfig";
 
 export default class ServiceUtil {
 
@@ -14,6 +15,13 @@ export default class ServiceUtil {
 
   static prepareDataBeforeUpsert = object => omitBy(object, isNil);
 
-
+  static makePostRequest = async (values, url, onSuccess, onError) => {
+    try {
+      const respo = await axios.post(url, values);
+      onSuccess && onSuccess(respo);
+    } catch (error) {
+      onError && onError(error)
+    }
+  }
 
 }

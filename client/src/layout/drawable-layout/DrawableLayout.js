@@ -18,11 +18,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import useStyles from './DrawableLayoutStyle';
 import DrawerMenu from "./components/DrawerMenu/DrawerMenu";
 import {FormDialog} from "../../reuse-components/FormDialog";
-import LoginFormFieldsSpecifications, {loginRequest} from "../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
+import LoginFormFieldsSpecifications
+    from "../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
 import {LoginForm} from "../../reuse-components/LoginForm";
-import SignUpFormFieldsSpecifications, {signupRequest} from "../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
+import SignUpFormFieldsSpecifications
+    from "../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../reuse-components/SignUpFormFields";
-import {access_token} from "../../constants/Endpoints";
+import {access_token, AUTH} from "../../constants/Endpoints";
+import ServiceUtil from "../../service/ServiceUtil";
 
 export default function DrawableLayout({children, history}) {
     const classes = useStyles();
@@ -67,7 +70,7 @@ export default function DrawableLayout({children, history}) {
                         confirmButtonName={'Entrar'}
                         formikOptions={{
                             ...LoginFormFieldsSpecifications,
-                            onSubmit: (values, actions, closeDialog) => loginRequest(values, actions,
+                            onSubmit: (values,  closeDialog) => ServiceUtil.makePostRequest(values, `${AUTH.signin}`,
                                 (response) => {
                                     localStorage.setItem(access_token, response.data.accessToken);
                                     closeDialog()
@@ -83,7 +86,16 @@ export default function DrawableLayout({children, history}) {
                         mainButtonName={"Cadastre-se"}
                         title={"Cadastre-se"}
                         confirmButtonName={'Confirmar'}
-                        formikOptions={SignUpFormFieldsSpecifications(signupRequest())}
+                        formikOptions={{
+                            ...SignUpFormFieldsSpecifications,
+                            onSubmit: (values,  closeDialog) =>  ServiceUtil.makePostRequest(values, `${AUTH.signup}`,
+                                (response) => {
+                                    localStorage.setItem(access_token, response.data.accessToken);
+                                    closeDialog()
+                                },
+                                (error) => setLoginErrorMessage(error.response.data.mensagem)
+                            )
+                        }}
                         renderContent={(formik) => <SignUpFormFields formik={formik}/>}
                     />
                 </Toolbar>

@@ -27,22 +27,15 @@ const validationSchema = yup.object().shape({
 
 });
 
-export const signupRequest = (onSuccess = console.log('sucess'), onError) => async  (values) => {
-    try{
-        const respo = await  axios.post(`${AUTH.signup}`, values);
-        onSuccess(respo);
-    }catch (error) {
-        onError(error)
-    }
-}
-export default (onSubmit) => ({
+
+export default {
     initialValues: {
         email: '',
         password: '',
     },
     validationSchema: validationSchema,
-    onSubmit,
-});
+
+};
 
 
 

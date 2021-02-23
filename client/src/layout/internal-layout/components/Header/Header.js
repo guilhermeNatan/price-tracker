@@ -6,12 +6,6 @@ import MenuIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import {withRouter} from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
-import {LoginForm} from "../../../../reuse-components/LoginForm";
-import {FormDialog} from "../../../../reuse-components/FormDialog";
-import SignUpFormFieldsSpecifications, {signupRequest} from "../../../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
-import {SignUpFormFields} from "../../../../reuse-components/SignUpFormFields";
-import LoginFormFieldsSpecifications
-  , {loginRequest} from "../../../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
 
 
 class Header extends Component {
@@ -32,19 +26,6 @@ class Header extends Component {
             { 'Bem vindo ao Jogo Justo'}
           </Typography>
 
-          <FormDialog
-              mainButtonName={"Login"}
-              title={"Login"}
-              formikOptions={LoginFormFieldsSpecifications(loginRequest())}
-              renderContent={(formik) => <LoginForm formik={formik}/>}
-          />
-
-          <FormDialog
-              mainButtonName={"Cadastre-se"}
-              title={"Cadastre-se"}
-              formikOptions={SignUpFormFieldsSpecifications(signupRequest())}
-              renderContent={(formik) => <SignUpFormFields formik={formik}/>}
-          />
         </Toolbar>
       </AppBar>
     );
