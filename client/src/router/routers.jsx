@@ -5,24 +5,23 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
 import {createBrowserHistory} from 'history';
 import {ToastContainer} from 'react-toastify';
-import { InternalLayout } from '../layout/internal-layout';
 import '../resources/css/style.css';
 import reducers from '../reducers';
 import 'react-toastify/dist/ReactToastify.css';
-import { Login } from '../pages/Login';
+import {Login} from '../pages/Login';
 import {SearchScreen} from "../pages/Search";
 import {GameDetailScreen} from "../pages/GameDetail";
-import { ConfirmEmailScreen } from "../pages/ConfirmEmail";
-import {GAME_DETAIL, SEARCH, AUTH} from "../constants/RoutePaths";
-import { ThemeProvider } from '@material-ui/core';
+import {ConfirmEmailScreen} from "../pages/ConfirmEmail";
+import {AUTH, GAME_DETAIL, SEARCH} from "../constants/RoutePaths";
+import {ThemeProvider} from '@material-ui/core';
 import theme from '../theme';
-
+import DrawableLayout from "../layout/drawable-layout/DrawableLayout";
 
 
 const history = createBrowserHistory();
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const renderizarComLayoutPadrao = Componente => props => (
-  <InternalLayout>
+  <DrawableLayout>
     <Componente
       params={props.match.params}
       router={props}
@@ -30,7 +29,7 @@ const renderizarComLayoutPadrao = Componente => props => (
       isCriar={props.match.params.operacao === 'criar'}
       history={history}
     />
-  </InternalLayout>
+  </DrawableLayout>
 );
 
 export const renderizarComLayoutLogin = Componente => (props) => {
