@@ -4,7 +4,7 @@
 
 const baseURL= 'public'
 export const SEARCH_GAME = 'public/games/search';
-
+export const access_token = 'accessToken';
 export const AUTH = {
     auth: `${baseURL}/auth`,
     signin: `${baseURL}/auth/signin`,

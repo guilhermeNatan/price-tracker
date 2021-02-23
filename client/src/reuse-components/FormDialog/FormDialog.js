@@ -6,10 +6,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import {useFormik} from "formik";
+import {Typography} from "@material-ui/core";
+import handleSubmit from "redux-form/lib/handleSubmit";
 
 
 function FormDialog({ mainButtonName="FormDialog", confirmButtonName="Submit", cancelableButtonName="Cancel",
-                        title, formikOptions, renderContent}) {
+                        title, formikOptions, renderContent, errorMessage}) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -21,7 +23,14 @@ function FormDialog({ mainButtonName="FormDialog", confirmButtonName="Submit", c
         setOpen(false);
     };
 
-    const formik = useFormik(formikOptions)
+    const handleSubmit = (values, actions) => {
+        formikOptions.onSubmit(values, actions, handleClose);
+    }
+
+    const formik = useFormik({
+        ...formikOptions,
+        onSubmit:handleSubmit ,
+    })
     return(
         <>
             <Button  color="secondary"
@@ -36,13 +45,11 @@ function FormDialog({ mainButtonName="FormDialog", confirmButtonName="Submit", c
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-                <form onSubmit={(...event) => {
-                    formik.handleSubmit(...event);
-                    handleClose();
-                }}>
+                <form onSubmit={ formik.handleSubmit}>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                             {renderContent(formik)}
+                            <div style={{color: 'red'}}> {errorMessage}</div>
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

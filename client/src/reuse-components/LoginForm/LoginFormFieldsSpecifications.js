@@ -7,7 +7,7 @@ import axios from "../../config/AxiosConfig";
 import {AUTH} from "../../constants/Endpoints";
 
 const validationSchema = yup.object({
-    email: yup
+    usernameOrEmail: yup
         .string('Enter your email')
         .email('Enter a valid email')
         .required('Email is required'),
@@ -18,22 +18,21 @@ const validationSchema = yup.object({
 });
 
 
-export const loginRequest = (onSuccess = console.log('sucess'), onError) => async  (values) => {
+export const loginRequest = async  (values, actions, onSuccess, onError) => {
     try{
         const respo = await  axios.post(`${AUTH.signin}`, values);
-        onSuccess(respo);
+        onSuccess && onSuccess(respo);
     }catch (error) {
-        onError(error)
+        onError &&  onError(error)
     }
 }
-export default (onSubmit ) => ({
+export default {
     initialValues: {
-        email: '',
+        usernameOrEmail: '',
         password: '',
     },
     validationSchema: validationSchema,
-    onSubmit,
-});
+};
 
 
 

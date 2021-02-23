@@ -9,13 +9,13 @@ export const LoginForm = ({formik }) => {
 
           <TextField
               fullWidth
-              id="email"
-              name="email"
+              id="usernameOrEmail"
+              name="usernameOrEmail"
               label="Email"
-              value={formik.values.email}
+              value={formik.values.usernameOrEmail}
               onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              error={formik.touched.usernameOrEmail && Boolean(formik.errors.usernameOrEmail)}
+              helperText={formik.touched.usernameOrEmail && formik.errors.usernameOrEmail}
           />
           <TextField
               fullWidth
