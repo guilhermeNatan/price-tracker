@@ -24,10 +24,10 @@ import {LoginForm} from "../../reuse-components/LoginForm";
 import SignUpFormFieldsSpecifications
     from "../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../reuse-components/SignUpFormFields";
-import {access_token, AUTH} from "../../constants/Endpoints";
-import ServiceUtil from "../../service/ServiceUtil";
+import {connect} from 'react-redux';
+import {asyncSignin} from "../../actions/userAction";
 
-export default function DrawableLayout({children, history}) {
+const  DrawableLayout = ({children, history, asyncSignin, user}) => {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -40,6 +40,7 @@ export default function DrawableLayout({children, history}) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
 
     return (
         <div className={classes.root}>
@@ -70,13 +71,8 @@ export default function DrawableLayout({children, history}) {
                         confirmButtonName={'Entrar'}
                         formikOptions={{
                             ...LoginFormFieldsSpecifications,
-                            onSubmit: (values,  closeDialog) => ServiceUtil.makePostRequest(values, `${AUTH.signin}`,
-                                (response) => {
-                                    localStorage.setItem(access_token, response.data.accessToken);
-                                    closeDialog()
-                                },
-                                (error) => setLoginErrorMessage(error.response.data.mensagem)
-                            )
+                            onSubmit: (values,  closeDialog) =>  asyncSignin(values, closeDialog,
+                                (error) => setSignupErrorMessage(error.response.data.mensagem))
                         }}
                         errorMessage={loginErrorMessage}
                         renderContent={(formik) => <LoginForm formik={formik}/>}
@@ -86,15 +82,11 @@ export default function DrawableLayout({children, history}) {
                         mainButtonName={"Cadastre-se"}
                         title={"Cadastre-se"}
                         confirmButtonName={'Confirmar'}
+                        errorMessage={signupErrorMessage}
                         formikOptions={{
                             ...SignUpFormFieldsSpecifications,
-                            onSubmit: (values,  closeDialog) =>  ServiceUtil.makePostRequest(values, `${AUTH.signup}`,
-                                (response) => {
-                                    localStorage.setItem(access_token, response.data.accessToken);
-                                    closeDialog()
-                                },
-                                (error) => setLoginErrorMessage(error.response.data.mensagem)
-                            )
+                            onSubmit: (values,  closeDialog) =>  asyncSignin(values, closeDialog,
+                                (error) => setSignupErrorMessage(error.response.data.mensagem))
                         }}
                         renderContent={(formik) => <SignUpFormFields formik={formik}/>}
                     />
@@ -128,3 +120,6 @@ export default function DrawableLayout({children, history}) {
         </div>
     );
 }
+
+const mapStateToProps = state => ({ user: state.user });
+export default connect(mapStateToProps, { asyncSignin })(DrawableLayout);
