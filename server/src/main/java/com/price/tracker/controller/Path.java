@@ -20,4 +20,9 @@ public interface Path {
         String RESETPASSWORD  =  "/resetpassword";
         String VALIDATE_EMAIL_ADDRESS =  "/validate-email-address";
     }
+
+    interface  UserProfiler {
+        String USER_DATA = BASE_PATH + "user";
+        String USER_ME = "/me";
+    }
 }

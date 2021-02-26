@@ -18,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -88,15 +89,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
       .csrf()
       .disable()
       .exceptionHandling()
+      .authenticationEntryPoint(unauthorizedHandler)
       .and()
       .sessionManagement()
+
       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       .and()
       .authorizeRequests()
       .antMatchers(BARRA,"/static/**", "/favicon.ico", "/service-worker.js",
         "/scrab/**",  BARRA +urlBase+"/*/public/**")
       .permitAll()
-
       .antMatchers(BARRA +urlBase+"/arquivo")
       .permitAll()
       .antMatchers( "/api/auth/**", "/api/public/**")
@@ -104,7 +106,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
       .anyRequest()
       .authenticated();
 
-
+    // Adiciona nosso filtro customizado JWT
+    http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
   @Bean
