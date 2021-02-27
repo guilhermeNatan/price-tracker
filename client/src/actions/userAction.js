@@ -28,7 +28,7 @@ export const asyncGetUserDetails =  (onSuccess, onError) => async dispacth => {
     await ServiceUtil.makeGetRequest(`${USER.userDetails}`,
         (response) => {
             dispacth(getUserDetails(response.data))
-            onSuccess()
+            onSuccess && onSuccess()
         },
         onError
     )
