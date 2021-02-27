@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styles from './SearchStyles';
 import {SearchField} from "./components/SearchField";
 import {ResultSearch} from "./components/ResultSearch";
-import axios from '../../config/AxiosConfig';
+import axios from 'axios';
 import {SEARCH_GAME} from "../../constants/Endpoints";
 import {GAME_DETAIL} from "../../constants/RoutePaths";
 import { withRouter } from 'react-router-dom';

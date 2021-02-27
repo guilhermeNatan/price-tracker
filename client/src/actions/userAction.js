@@ -3,22 +3,13 @@
  */
 
 import ServiceUtil from "../service/ServiceUtil";
-import {access_token, AUTH} from "../constants/Endpoints";
+import {ACCESS_TOKEN, AUTH, USER} from "../constants/Endpoints";
 
-export const GET_USER_ACT = 'GET_USER_ACT';
-
-export const getUserAct  = payload => ({
-    type: GET_USER_ACT ,
-    payload,
-});
 
 export const asyncSignin =  ({usernameOrEmail,  password}, onSuccess, onError) => async dispacth => {
-
    await ServiceUtil.makePostRequest({usernameOrEmail,  password}, `${AUTH.signin}`,
         (response) => {
-            localStorage.setItem(access_token, response.data.accessToken);
-            //TODO: isso deve vir do response
-            dispacth(getUserAct({ usernameOrEmail, password}))
+            localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
             onSuccess()
         },
        onError
@@ -26,3 +17,19 @@ export const asyncSignin =  ({usernameOrEmail,  password}, onSuccess, onError) =
 };
 
 
+export const GET_USER_DETAILS = 'GET_USER_DETAILS';
+export const getUserDetails  = payload => ({
+    type: GET_USER_DETAILS ,
+    payload,
+});
+
+
+export const asyncGetUserDetails =  (onSuccess, onError) => async dispacth => {
+    await ServiceUtil.makeGetRequest(`${USER.userDetails}`,
+        (response) => {
+            dispacth(getUserDetails(response.data))
+            onSuccess()
+        },
+        onError
+    )
+};

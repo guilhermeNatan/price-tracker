@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styles from './ConfirmEmailStyles';
 import { withRouter } from 'react-router-dom';
-import axios from '../../config/AxiosConfig';
+import axios from 'axios';
 import {AUTH} from "../../constants/Endpoints";
 class ConfirmEmailScreen extends Component {
 

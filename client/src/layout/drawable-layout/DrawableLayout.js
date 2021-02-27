@@ -25,9 +25,10 @@ import SignUpFormFieldsSpecifications
     from "../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../reuse-components/SignUpFormFields";
 import {connect} from 'react-redux';
-import {asyncSignin} from "../../actions/userAction";
+import { asyncGetUserDetails} from "../../actions/userAction";
+import AuthService from "../../service/AuthService";
 
-const  DrawableLayout = ({children, history, asyncSignin, user}) => {
+const  DrawableLayout = ({children, history, asyncGetUserDetails}) => {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -41,6 +42,10 @@ const  DrawableLayout = ({children, history, asyncSignin, user}) => {
         setOpen(false);
     };
 
+    const makeLogin = (values,  closeDialog) =>  {
+        const getUserDetailsAfterLogin = () =>  asyncGetUserDetails(closeDialog );
+        AuthService.signin(values, getUserDetailsAfterLogin, (error) => setLoginErrorMessage(error.response.data.mensagem) )
+    }
 
     return (
         <div className={classes.root}>
@@ -71,8 +76,7 @@ const  DrawableLayout = ({children, history, asyncSignin, user}) => {
                         confirmButtonName={'Entrar'}
                         formikOptions={{
                             ...LoginFormFieldsSpecifications,
-                            onSubmit: (values,  closeDialog) =>  asyncSignin(values, closeDialog,
-                                (error) => setSignupErrorMessage(error.response.data.mensagem))
+                            onSubmit: makeLogin
                         }}
                         errorMessage={loginErrorMessage}
                         renderContent={(formik) => <LoginForm formik={formik}/>}
@@ -85,12 +89,12 @@ const  DrawableLayout = ({children, history, asyncSignin, user}) => {
                         errorMessage={signupErrorMessage}
                         formikOptions={{
                             ...SignUpFormFieldsSpecifications,
-                            onSubmit: (values,  closeDialog) =>  asyncSignin(values, closeDialog,
-                                (error) => setSignupErrorMessage(error.response.data.mensagem))
+                            onSubmit: (values,  closeDialog) =>  AuthService.signin(values, closeDialog, (error) => setSignupErrorMessage(error.response.data.mensagem))
                         }}
                         renderContent={(formik) => <SignUpFormFields formik={formik}/>}
                     />
                 </Toolbar>
+
             </AppBar>
             <Drawer
                 className={classes.drawer}
@@ -122,4 +126,4 @@ const  DrawableLayout = ({children, history, asyncSignin, user}) => {
 }
 
 const mapStateToProps = state => ({ user: state.user });
-export default connect(mapStateToProps, { asyncSignin })(DrawableLayout);
+export default connect(mapStateToProps, { asyncGetUserDetails })(DrawableLayout);

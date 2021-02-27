@@ -2,15 +2,20 @@
  * Copyright (c) 2021. Crido por Guilherme Natan Barbosa Alecrim
  */
 
-const baseURL= 'public'
+const publicUrl= 'public'
 export const SEARCH_GAME = 'public/games/search';
-export const access_token = 'accessToken';
-export const AUTH = {
-    auth: `${baseURL}/auth`,
-    signin: `${baseURL}/auth/signin`,
-    signup: `${baseURL}/auth/signup`,
-    forgotpassword: `${baseURL}/auth/forgotpassword`,
-    resetpassword: `${baseURL}/auth/resetpassword`,
-    confirmAddressEmaill: `${baseURL}/auth/validate-email-address`
+export const ACCESS_TOKEN = 'JogoBaixoAccessToken';
 
+export const AUTH = {
+    auth: `${publicUrl}/auth`,
+    signin: `${publicUrl}/auth/signin`,
+    signup: `${publicUrl}/auth/signup`,
+    forgotpassword: `${publicUrl}/auth/forgotpassword`,
+    resetpassword: `${publicUrl}/auth/resetpassword`,
+    confirmAddressEmaill: `${publicUrl}/auth/validate-email-address`
+
+}
+
+export const USER = {
+    userDetails: 'user/me'
 }

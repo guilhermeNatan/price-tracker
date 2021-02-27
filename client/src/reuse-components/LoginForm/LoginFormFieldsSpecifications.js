@@ -3,8 +3,7 @@
  */
 
 import * as yup from "yup";
-import axios from "../../config/AxiosConfig";
-import {AUTH} from "../../constants/Endpoints";
+
 
 const validationSchema = yup.object({
     usernameOrEmail: yup
