@@ -24,5 +24,7 @@ jobs:
       env:
         JOGOBAIXO_JWTSECRET: ${{ secrets.JOGOBAIXO_JWTSECRET }}
         JOGOBAIXO_JWTEXPIRATIONINMS: ${{ secrets.JOGOBAIXO_JWTEXPIRATIONINMS }}
+        JOGOBAIXO_MAIL_USERNAME: ${{ secrets.MAIL_PASSWORD }}
+        JOGOBAIXO_MAIL_PASSWORD: ${{ secrets.MAIL_USERNAME }}
       run: mvn -B package --file server/pom.xml
 
