@@ -3,13 +3,16 @@
 Monitorar o preço de games na playstation store por meio de scrab.
 
 
+![](./jogo%20justo.PNG)
+
+
 # Como executar projeto 
 
 ### Pré-requisitos 
 * maven 3.6 ou superior configurado
 * jdk 1.8.0_191
 
-# Server 
+# Server-side 
 
 ### Estrutura de pastas 
 ```
@@ -46,7 +49,10 @@ Monitorar o preço de games na playstation store por meio de scrab.
 └── entity
 ```
 
-# API
+# Estratégia 
+
+Os dados são consumidos por um schedule que é executado uma vez ao dia coletando informações de 
+preços de alguns sites usando api jsoup. 
 
 
 # Arquitetura
@@ -88,7 +94,7 @@ Para executar a bateria de testes execute o seguinte comando dentro da raiz do p
 ```mvn test```
 
 
-# Client 
+# Client-side 
 
 
 ## Estrutura de diretórios client
