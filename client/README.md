@@ -1,13 +1,7 @@
 
-# Reactjs start 
 
-Um projeto base para criação de projetos react js. 
 
-## Pré requisitos
-
-## Como iniciar projeto 
-
-###Estrutura de diretórios do projeto 
+### Estrutura de diretórios client
 
 ```
     ├── TemplateModule   
