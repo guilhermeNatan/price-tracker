@@ -10,7 +10,8 @@ Monitorar o preço de games na playstation store por meio de scrab.
 * jdk 1.8.0_191
 
 # Server 
-### Estrutura de pastas
+
+### Estrutura de pastas 
 ```
 ├── main
 │     ├── java
@@ -90,7 +91,7 @@ Para executar a bateria de testes execute o seguinte comando dentro da raiz do p
 # Client 
 
 
-### Estrutura de diretórios client
+## Estrutura de diretórios client
 
 ```
     ├── TemplateModule   
