@@ -2,7 +2,7 @@
 
 Monitorar o preço de games na playstation store por meio de scrab.
 
-
+![](./jogo%20justo2.PNG)
 ![](./jogo%20justo.PNG)
 
 
@@ -182,12 +182,19 @@ Para executar a bateria de testes execute o seguinte comando dentro da raiz do p
   Cria estrutura base de página dentro do diretório pages.
 
 
+# Melhorias futuras 
+* Layout da aplicação!  
+* Adicionar mais lojas para serem monitoradas 
+* Envio de e-mail por alerta 
 
 
-## Tecnologias utilizadas
-
+# Tecnologias utilizadas
+- Framework Backend: Spring boot
+- Framework Frontend: ReactJs
 - Banco de dados: H2  (https://www.h2database.com/html/main.html)
-- IDE:  Intellij IDEA (https://www.jetbrains.com/idea/promo/ultimate/?gclid=CjwKCAjwwab7BRBAEiwAapqpTDTCRbK2d8oCcHZuscQZAW9EayYBAXtT9n58ayiWwafcDp-9OvdxwhoCeD8QAvD_BwE)
+- Continuous Integrations: Docker - Github actions - Junit
+- IDE:  Intellij IDEA 
 - Teste da API rest: Postman  (https://www.postman.com/)
+- Teste de unidade: Junit  
 - Gerenciador de dependência: Maven 3.6  (https://maven.apache.org/)
-- Lombok 
+
