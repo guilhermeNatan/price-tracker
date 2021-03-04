@@ -17,7 +17,7 @@ class InternalLayout extends React.Component {
       <div className={classes.root}>
         <CssBaseline />
         <Header classes={classes} theme={theme} />
-        <Menu classes={classes} theme={theme} history={history} />
+        {/*<Menu classes={classes} theme={theme} history={history} />*/}
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {children}

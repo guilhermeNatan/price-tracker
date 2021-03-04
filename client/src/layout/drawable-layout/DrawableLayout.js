@@ -77,7 +77,7 @@ const DrawableLayout = ({children, history, asyncGetUserDetails, user}) => {
                     </IconButton>
                     <div style={{display: 'flex', flexDirection: 'row', flex: 1}}>
                         <Typography variant="h3" color={"secondary"} style={{display: 'flex', flex: 1}}>
-                            Jogo justo
+                            Troca e Vendas Capelinha
                         </Typography>
 
                         {

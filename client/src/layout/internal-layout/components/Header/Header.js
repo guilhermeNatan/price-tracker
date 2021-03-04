@@ -22,8 +22,8 @@ class Header extends Component {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5" style={{flexGrow: 1}} color="inherit" component="p" noWrap>
-            { 'Bem vindo ao Jogo Justo'}
+          <Typography variant="h3" style={{flexGrow: 1}} color="inherit" component="p" noWrap>
+            { 'Troca e Vendas Capelinha'}
           </Typography>
 
         </Toolbar>
