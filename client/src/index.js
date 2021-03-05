@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Rotas from "./router/routers";
 import './config/AxiosConfig';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import RouterContainer from "./router";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Rotas />
+    <RouterContainer />
   </React.StrictMode>,
   document.getElementById('root')
 );
