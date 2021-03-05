@@ -15,4 +15,13 @@ export default class AuthService {
             },
             onError
         )
+
+    static signup =  async (values, onSuccess, onError) =>
+        await ServiceUtil.makePostRequest(values, `${AUTH.signup}`,
+            () => {
+                localStorage.removeItem(ACCESS_TOKEN);
+                onSuccess()
+            },
+            onError
+        )
 }

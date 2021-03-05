@@ -6,15 +6,6 @@ import ServiceUtil from "../service/ServiceUtil";
 import {ACCESS_TOKEN, AUTH, USER} from "../constants/Endpoints";
 
 
-export const asyncSignin =  ({usernameOrEmail,  password}, onSuccess, onError) => async dispacth => {
-   await ServiceUtil.makePostRequest({usernameOrEmail,  password}, `${AUTH.signin}`,
-        (response) => {
-            localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
-            onSuccess()
-        },
-       onError
-    )
-};
 
 
 export const GET_USER_DETAILS = 'GET_USER_DETAILS';
