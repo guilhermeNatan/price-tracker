@@ -51,8 +51,7 @@ Monitorar o preço de games na playstation store por meio de scrab.
 
 # Estratégia 
 
-Os dados são consumidos por um schedule que é executado uma vez ao dia coletando informações de 
-preços de alguns sites usando api jsoup. 
+
 
 
 # Arquitetura
@@ -181,11 +180,6 @@ Para executar a bateria de testes execute o seguinte comando dentro da raiz do p
 
   Cria estrutura base de página dentro do diretório pages.
 
-
-# Melhorias futuras 
-* Layout da aplicação!  
-* Adicionar mais lojas para serem monitoradas 
-* Envio de e-mail por alerta 
 
 
 # Tecnologias utilizadas
