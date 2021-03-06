@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react';
-import {styles, costumStyles} from './SearchFieldStyles';
+import {costumStyles} from './SearchFieldStyles';
 import SearchBar from "material-ui-search-bar";
 import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import {withStyles} from "@material-ui/core/styles";
-
+import Grid from '@material-ui/core/Grid';
+import Verify from "../../../../util/Verify";
 
 class SearchField extends PureComponent {
   constructor(props) {
@@ -19,23 +20,38 @@ class SearchField extends PureComponent {
     const {value} = this.state;
 
     return (
-      <div style={styles.container}>
-          <div style={styles.searchContainer}>
+      <Grid
+          container
+          direction="row"
+          justify="flex-end"
+          alignItems="center"
+          spacing={2}
+
+      >
+
+          <Grid item md={11} sm={6} xs={12}>
             <SearchBar
                 value={value}
                 onChange={onChangeSearch}
                 onRequestSearch={onRequestSearch}
             />
-          </div>
-        <div style={styles.searchButton}>
-            <Button  variant="contained" color="primary" classes={{
-              root: classes.button }}
-                onClick={makeSearch}
-            >
-              Pesquisar
-            </Button>
-          </div>
-      </div>
+          </Grid>
+
+          {
+              !Verify.isMobile && (
+                  <Grid item md={1} sm={6}>
+                      <Button  variant="contained" color="primary" classes={{
+                          root: classes.button }}
+                               onClick={makeSearch}
+                      >
+                          Pesquisar
+                      </Button>
+                  </Grid>
+              )
+          }
+
+
+      </Grid>
     );
   }
 }

@@ -23,7 +23,7 @@ const theme = createMuiTheme({
         }
     },
     shadows,
-    typography
+    // typography
 
 });
 
@@ -31,9 +31,7 @@ theme.props = {
     MuiButton: {
         disableElevation: true,
     },
-    MuiTypography: {
-        color: 'textPrimary'
-    }
+
 }
 theme.overrides = {
     MuiButton: {
@@ -55,22 +53,25 @@ theme.overrides = {
     },
     MuiTypography: {
         h1: {
-            fontSize: '29px'
+            fontSize: '1.8rem'
         },
         h2: {
-            fontSize: '24px'
+            fontSize: '1.5rem'
         },
         h3: {
-            fontSize: '20px'
+            fontSize: '1.25rem'
         },
         h4: {
-            fontSize: '16px'
+            fontSize: '1rem',
+            [theme.breakpoints.up('md')]: {
+                fontSize: '1.5rem',
+            },
         },
         h5: {
-            fontSize: '14px'
+            fontSize: '0.87rem'
         },
         h6: {
-            fontSize: '12px'
+            fontSize: '0.75rem'
         }
     }
 

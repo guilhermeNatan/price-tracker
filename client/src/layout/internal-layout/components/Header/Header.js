@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import {withRouter} from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
@@ -13,7 +11,7 @@ import LoginFormFieldsSpecifications
   from "../../../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
 import {LoginForm} from "../../../../reuse-components/LoginForm";
 import AuthService from "../../../../service/AuthService";
-import {asyncGetUserDetails} from "../../../../actions/userAction";
+import {asyncGetUserDetails, showMessageAct} from "../../../../actions";
 import SignUpFormFieldsSpecifications
   from "../../../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../../../reuse-components/SignUpFormFields";
@@ -46,14 +44,8 @@ class Header extends Component {
 
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h3" style={{flexGrow: 1}} color="inherit" component="p" noWrap>
+
+          <Typography variant="h4" style={{flexGrow: 1}} color="inherit" component="p" noWrap >
             { 'Troca e Vendas Capelinha'}
           </Typography>
 
