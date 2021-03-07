@@ -50,16 +50,7 @@ class SearchScreen extends Component {
 
 
             <Grid item >
-                <div style={{
-                    backgroundColor: '#2a4dad',
-                    minHeight: '20vh',
-                    padding: '3%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-
-                }}>
+                <div style={styles.container}>
                 <SearchField onChangeSearch={this.onChangeSearch}
                              makeSearch={this.doSearch}
                              onRequestSearch={this.doSearch}/>

@@ -1,7 +1,14 @@
 const styles = {
   container: {
-    flex: 1,
-    backgroundColor: 'yellow'
+    backgroundColor: '#2a4dad',
+    minHeight: '20vh',
+    padding: '3%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: '5vh'
+
   },
 };
 
