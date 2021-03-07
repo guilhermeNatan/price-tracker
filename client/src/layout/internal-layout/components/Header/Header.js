@@ -35,7 +35,14 @@ class Header extends Component {
       AuthService.signin(values, getUserDetailsAfterLogin, (error) => this.setLoginErrorMessage(error.response.data.mensagem))
     }
     const makeSignup = (values, closeDialog) => {
-      AuthService.signup(values, ()=> console.log('confirme o e-mail'), (error) => this.setSignupErrorMessage(error.response.data.mensagem))
+      const {showMessageAct} = this.props;
+
+      AuthService.signup(values, ()=>showMessageAct({
+        showMessage: true,
+        type: 'success',
+        text: 'Obrigado por se cadastrar'
+
+      }), (error) => this.setSignupErrorMessage(error.response.data.mensagem))
     }
 
     const { classes, user } = this.props;
@@ -88,5 +95,5 @@ class Header extends Component {
 
 const mapStateToProps = state => ({ parametros: state.parametros, user: state.user });
 const router = withRouter(Header);
-export default connect(mapStateToProps, {asyncGetUserDetails})(router);
+export default connect(mapStateToProps, {asyncGetUserDetails, showMessageAct})(router);
 

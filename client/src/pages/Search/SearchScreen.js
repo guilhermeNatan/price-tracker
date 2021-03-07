@@ -6,6 +6,8 @@ import axios from 'axios';
 import {SEARCH_GAME} from "../../constants/Endpoints";
 import {GAME_DETAIL} from "../../constants/RoutePaths";
 import { withRouter } from 'react-router-dom';
+import Grid from "@material-ui/core/Grid";
+import {CategoryMenu} from "./components/CategoryMenu";
 
 class SearchScreen extends Component {
     constructor(props, context) {
@@ -36,15 +38,45 @@ class SearchScreen extends Component {
 
     render() {
         const {resultSearch, isLoading} = this.state;
+
+        const {mediaQuery} = this.props;
+
     return (
-      <div style={styles.container}>
+        <Grid
+                container
+                direction="column"
+                 justify="center"
+        >
 
-        <SearchField onChangeSearch={this.onChangeSearch } makeSearch={this.doSearch}
-                     onRequestSearch={this.doSearch}/>
-        <ResultSearch data={resultSearch} isLoading={isLoading}
 
-                      onRowClick={this.onRowClick}/>
-      </div>
+            <Grid item >
+                <div style={{
+                    backgroundColor: '#2a4dad',
+                    minHeight: '20vh',
+                    padding: '3% 3% 0 3%',
+                }}>
+                <SearchField onChangeSearch={this.onChangeSearch}
+                             makeSearch={this.doSearch}
+                             onRequestSearch={this.doSearch}/>
+
+
+                  <CategoryMenu
+                      mediaQuery={mediaQuery}
+                  />
+
+
+                </div>
+            </Grid>
+            <div  style={{padding: '3% 3% 0 3%'}}>
+                <Grid item >
+                    <ResultSearch data={resultSearch}
+                                  isLoading={isLoading}
+                                  onRowClick={this.onRowClick}/>
+
+                </Grid>
+            </div>
+
+        </Grid>
     );
   }
 }

@@ -24,12 +24,11 @@ class SearchField extends PureComponent {
           container
           direction="row"
           justify="flex-end"
-          alignItems="center"
           spacing={2}
 
       >
 
-          <Grid item md={11} sm={6} xs={12}>
+          <Grid item  xs={12} sm={11} md={11} lg={11} >
             <SearchBar
                 value={value}
                 onChange={onChangeSearch}
@@ -39,7 +38,7 @@ class SearchField extends PureComponent {
 
           {
               !Verify.isMobile && (
-                  <Grid item md={1} sm={6}>
+                  <Grid item md={1} sm={11} lg={1} >
                       <Button  variant="contained" color="primary" classes={{
                           root: classes.button }}
                                onClick={makeSearch}

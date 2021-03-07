@@ -19,11 +19,11 @@ const theme = createMuiTheme({
         },
         text: {
             primary: colors.blueGrey[900],
-            secondary: colors.blueGrey[600]
+            secondary: '#FFFFFF'
         }
     },
     shadows,
-    // typography
+    typography
 
 });
 
@@ -63,9 +63,6 @@ theme.overrides = {
         },
         h4: {
             fontSize: '1rem',
-            [theme.breakpoints.up('md')]: {
-                fontSize: '1.5rem',
-            },
         },
         h5: {
             fontSize: '0.87rem'

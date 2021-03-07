@@ -13,20 +13,35 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {closseMessageAct} from '../actions';
 import {InternalLayout} from "../layout/internal-layout";
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const history = createBrowserHistory();
 
-const renderizarComLayoutPadrao = Componente => props => (
-  <InternalLayout>
-    <Componente
-      params={props.match.params}
-      router={props}
-      isEditar={props.match.params.operacao === 'editar'}
-      isCriar={props.match.params.operacao === 'criar'}
-      history={history}
-    />
-  </InternalLayout>
-);
+const renderizarComLayoutPadrao = Componente => props => {
+    const isMobile = useMediaQuery('(max-width:767px)');
+    const isDesktop = useMediaQuery('(min-width:992px)');
+    const isTablet = useMediaQuery('(min-width:768px) and  (max-width: 991px)');
+    const defaultLayout =  useMediaQuery('(min-width:768px)');
+
+    return (
+        <InternalLayout>
+            <Componente
+                params={props.match.params}
+                router={props}
+                isEditar={props.match.params.operacao === 'editar'}
+                isCriar={props.match.params.operacao === 'criar'}
+                history={history}
+                mediaQuery={{
+                    isMobile:isMobile,
+                    isDesktop:isDesktop,
+                    isTablet:isTablet,
+                    defaultLayout:defaultLayout
+                }}
+
+            />
+        </InternalLayout>
+    )
+};
 
 
 export const renderizarComLayoutLogin = Componente => (props) => {
