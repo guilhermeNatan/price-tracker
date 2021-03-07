@@ -33,6 +33,7 @@ class SearchField extends PureComponent {
                 value={value}
                 onChange={onChangeSearch}
                 onRequestSearch={onRequestSearch}
+                placeholder={'Estou procurando por...'}
             />
           </Grid>
 
