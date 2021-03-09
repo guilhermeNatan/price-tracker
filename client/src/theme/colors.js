@@ -7,4 +7,6 @@ export default  {
     secondaryDarkColor:'#c67100',
     primaryTextColor:'#000000',
     secondaryTextColor:'#000000',
+    iceBackground: '#efefef',
+    footer: '#dedede',
 }

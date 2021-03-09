@@ -61,10 +61,6 @@ class CategoryMenu extends PureComponent {
                 icon: bedIcon,
             },
             {
-                name: 'Para sua casa',
-                icon: homeIcon,
-            },
-            {
                 name: 'Eletrônicos e celulares',
                 icon: mobileFone,
             },

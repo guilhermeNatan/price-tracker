@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import {Header} from './components/Header';
-import {Menu} from './components/Menu';
 import styles from "./InternalLayoutStyle";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 class InternalLayout extends React.Component {
   render() {
@@ -22,6 +23,25 @@ class InternalLayout extends React.Component {
           <div className={classes.toolbar} />
           {children}
         </main>
+          <footer className={classes.footer}>
+
+                  <div className={classes.linksContainer}>
+
+                      <Typography variant={"body2"} component={'a'}
+                                  className={classes.link}>
+                          Como anunciar
+                      </Typography>
+
+                  </div>
+
+                  <Divider
+                      className={classes.divider}/>
+
+                  <Typography variant={"body2"} component={'p'} className={classes.address}>
+                      Troca e Vendas Capelinha LTDA, Rua XXXXXX, 359, Bairro Piedade - 22220-021 -
+                      Capelinha
+                  </Typography>
+          </footer>
       </div>
     );
   }
