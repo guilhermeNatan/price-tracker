@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import styles from './ResultSearchStyles';
 import MaterialTable from 'material-table';
 import {CardResult} from "./CardResult";
+import Typography from "@material-ui/core/Typography";
 
 
 class ResultSearch extends PureComponent {
@@ -46,6 +47,15 @@ class ResultSearch extends PureComponent {
 
     return (
       <div style={styles.container}>
+          <div style={{marginBottom: '5vh'}}>
+              <Typography variant="h1" component={'i'}
+                          style={{
+                              textDecoration: 'i',
+                              fontSize: '2rem'
+                          }}>
+                  Você pesquisou por: "Violão"
+              </Typography>
+          </div>
         <MaterialTable
             options={{
                 header: false,
