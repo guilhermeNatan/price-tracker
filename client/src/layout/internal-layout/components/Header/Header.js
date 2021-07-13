@@ -15,6 +15,7 @@ import {asyncGetUserDetails, showMessageAct} from "../../../../actions";
 import SignUpFormFieldsSpecifications
   from "../../../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../../../reuse-components/SignUpFormFields";
+import {BARRA} from "../../../../constants/RoutePaths";
 
 class Header extends Component {
   constructor(props, context) {
@@ -45,16 +46,37 @@ class Header extends Component {
       }), (error) => this.setSignupErrorMessage(error.response.data.mensagem))
     }
 
-    const { classes, user } = this.props;
+    const { classes, user, history } = this.props;
     const { loginErrorMessage, signupErrorMessage } = this.state;
     return (
 
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
 
-          <Typography variant="h4" style={{flexGrow: 1}} color="inherit" component="p" noWrap >
-            { 'Troca e Vendas Capelinha'}
-          </Typography>
+
+          <div style={{
+            display: "flex",
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            flex: 1
+          }}>
+            <button style={{
+              border: "none", background: "none",
+              color: "inherit",
+              padding: 0,
+              font: "inherit",
+              cursor: "pointer",
+              outline: "inherit",
+
+            }}>
+              <Typography variant="h4"
+                          onClick={() => history.push(BARRA)}
+                          color="inherit"
+                          noWrap>
+                {'Troca e Vendas Capelinha'}
+              </Typography>
+            </button>
+          </div>
 
           {
             !_.isEmpty(user) && <UserMenu/>

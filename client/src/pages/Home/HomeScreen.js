@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import styles from './HomeStyles';
 import {SearchField} from "../Search/components/SearchField";
-import axios from 'axios';
-import {SEARCH_GAME} from "../../constants/Endpoints";
-import {GAME_DETAIL} from "../../constants/RoutePaths";
+import {GAME_DETAIL, SEARCH} from "../../constants/RoutePaths";
 import {withRouter} from 'react-router-dom';
 import {CategoryMenu} from "../Search/components/CategoryMenu";
 import {RecentAnnoucements} from "./components/RecentAnnoucements";
-import {ResultSearch} from "../Search/components/ResultSearch";
 
 class SearchScreen extends Component {
   constructor(props, context) {
@@ -24,10 +21,16 @@ class SearchScreen extends Component {
 
   doSearch = async  () => {
     const {searchValue} = this.state;
-    this.setState({isLoading: true})
-    const respo = await  axios.get(`${SEARCH_GAME}?name=${searchValue}`);
-    const {conteudo} = respo.data
-    this.setState({resultSearch: conteudo, isLoading: false})
+    const {history} = this.props;
+    history.push({
+      pathname: SEARCH.search,
+      search: `q=${searchValue}`,
+      state: { tab: 1 },
+    });
+    // this.setState({isLoading: true})
+    // const respo = await  axios.get(`${SEARCH_GAME}?name=${searchValue}`);
+    // const {conteudo} = respo.data
+    // this.setState({resultSearch: conteudo, isLoading: false})
 
   }
 
@@ -39,7 +42,7 @@ class SearchScreen extends Component {
   render() {
     const {resultSearch, isLoading} = this.state;
 
-    const {mediaQuery} = this.props;
+    const {mediaQuery, history} = this.props;
 
     return (
 
@@ -53,6 +56,7 @@ class SearchScreen extends Component {
 
               <CategoryMenu
                   mediaQuery={mediaQuery}
+                  history={history}
               />
 
 

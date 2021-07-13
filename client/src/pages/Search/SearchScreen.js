@@ -39,7 +39,7 @@ class SearchScreen extends Component {
     render() {
         const {resultSearch, isLoading} = this.state;
 
-        const {mediaQuery} = this.props;
+        const {mediaQuery, history} = this.props;
 
     return (
         <Grid
@@ -58,6 +58,7 @@ class SearchScreen extends Component {
 
                   <CategoryMenu
                       mediaQuery={mediaQuery}
+                      history={history}
                   />
 
 

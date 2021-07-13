@@ -13,14 +13,29 @@ import {
     mobileFone,
     toolsIcon
 } from './categoryIcons';
+import {SEARCH} from "../../../../constants/RoutePaths";
+import PropTypes from "prop-types";
 
 class CategoryMenu extends PureComponent {
 
     renderCategory = (category) => {
-        const {mediaQuery} = this.props;
+        const {mediaQuery, history} = this.props;
         const styles = categoryMenuStyles(mediaQuery);
-
         return (
+            <button style={{
+                border: "none", background: "none",
+                color: "inherit",
+                padding: 0,
+                font: "inherit",
+                cursor: "pointer",
+                outline: "inherit",
+
+            }}
+            onClick={() => history.push({
+                pathname: SEARCH.search,
+                search: `cat=${category.id}`
+            })}
+            >
             <div style={styles.categoryItemContainer}
                  key={category.name}>
                 <div style={styles.categoryItemIcon}>
@@ -43,6 +58,7 @@ class CategoryMenu extends PureComponent {
                     {category.name}
                 </Typography>
             </div>
+            </button>
         )
     }
 
@@ -51,38 +67,48 @@ class CategoryMenu extends PureComponent {
             {
                 name: 'Imóveis',
                 icon: homeIcon,
+                id: 'IMOVEIS',
             },
             {
                 name: 'Auto e peças',
                 icon: carIcon,
+                id: 'AUTO_E_PECAS',
+
             },
             {
                 name: 'Para a sua casa',
                 icon: bedIcon,
+                id: 'PARA_SUA_CASA'
             },
             {
                 name: 'Eletrônicos e celulares',
                 icon: mobileFone,
+                id: 'ELETRONICOS_E_CELULARES'
             },
             {
                 name: 'Vagas de emprego',
                 icon: bussinessIcon,
+                id: 'VAGAS_DE_EMPREGO'
             },
             {
                 name: 'Serviços',
                 icon: toolsIcon,
+                id: 'SERVICOS'
             },
             {
                 name: 'Música e hobbies',
                 icon: guitarIcon,
+                id: 'MUSICA_E_HOBBIES'
             },
             {
                 name: 'Esportes e lazer',
                 icon: basketBallIcon,
+                id: 'ESPORTES_E_LAZER',
             },
             {
                 name: 'Moda e lazer',
                 icon: dressIcon,
+                id: 'MODA_E_LAZER',
             },
         ])
     }
@@ -103,5 +129,12 @@ class CategoryMenu extends PureComponent {
     );
   }
 }
+
+CategoryMenu.propTypes = {
+    mediaQuery: PropTypes.object,
+    history: PropTypes.object.isRequired,
+};
+
+
 
 export default CategoryMenu;

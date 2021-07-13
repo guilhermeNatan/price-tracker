@@ -6,9 +6,10 @@ import '../resources/css/style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {Login} from '../pages/Login';
 import {SearchScreen} from "../pages/Search";
+import {Home} from "../pages/Home";
 import {GameDetailScreen} from "../pages/GameDetail";
 import {ConfirmEmailScreen} from "../pages/ConfirmEmail";
-import {AUTH, GAME_DETAIL, SEARCH} from "../constants/RoutePaths";
+import {AUTH, BARRA, SEARCH} from "../constants/RoutePaths";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {closseMessageAct} from '../actions';
@@ -57,6 +58,7 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 
 const login = renderizarComLayoutLogin(Login);
 const pesquisa = renderizarComLayoutPadrao(SearchScreen);
+const home = renderizarComLayoutPadrao(Home);
 const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
 const confirmEmail = renderizarComLayoutPadrao(ConfirmEmailScreen);
 
@@ -67,9 +69,11 @@ class Rotas extends Component{
     return (
         <div>
             <Switch>
-                <Route exact path="/" component={pesquisa}/>
-                <Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>
-                <Route exact path={SEARCH} component={login}/>
+                <Route exact path={BARRA} component={home}/>
+                <Route exact path={SEARCH.search} component={pesquisa}/>
+
+                {/*<Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>*/}
+                {/*<Route exact path={LOGIN} component={login}/>*/}
                 <Route exact path={`${AUTH.confirmEmail}/:confirmEmailToken`}
                        component={confirmEmail}/>
 

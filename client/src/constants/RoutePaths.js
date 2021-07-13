@@ -1,4 +1,4 @@
-export const SEARCH = '/login';
+export const LOGIN = '/login';
 export const GAME_DETAIL = '/game-detail';
 
 export const AUTH = {
@@ -6,3 +6,8 @@ export const AUTH = {
 }
 
 
+export const SEARCH = {
+        search:`/search`,
+}
+
+export const BARRA = "/"
