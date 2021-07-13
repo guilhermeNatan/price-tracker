@@ -8,7 +8,7 @@ class RecentAnnoucements extends PureComponent {
   render() {
       var items =  [
           {
-              image: 'https://img.olx.com.br/thumbs256x256/83/830196138322724.jpg',
+              image: 'https://a-static.mlcdn.com.br/618x463/violao-nylon-acustico-valencia-4-4-vc564t/musicalcenter/valenciavc564t/05fb2cb44b32aea20d111fe29c67e21e.jpg',
               title: 'Violão',
               price:  'R$ 600,00',
               description: ' Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
@@ -16,7 +16,7 @@ class RecentAnnoucements extends PureComponent {
               address: 'Capelinha'
           },
           {
-              image: 'https://img.olx.com.br/thumbs256x256/92/922115269743729.jpg',
+              image: 'https://images.tcdn.com.br/img/img_prod/414764/kit_completo_guitarra_stratocaster_phx_strato_power_amplificador_e_acessorios_1733_1_228f9c47daf0d8a58cbb33d0c873a4d1.jpg',
               title: 'Violão',
               price:  'R$ 600,00',
               description: ' Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
@@ -24,7 +24,7 @@ class RecentAnnoucements extends PureComponent {
               address: 'Belo Horizonte'
           },
           {
-              image: 'https://img.olx.com.br/thumbs256x256/92/922115269743729.jpg',
+              image: 'https://images.tcdn.com.br/img/img_prod/414764/kit_completo_guitarra_stratocaster_phx_strato_power_amplificador_e_acessorios_1733_1_228f9c47daf0d8a58cbb33d0c873a4d1.jpg',
               title: 'Violão',
               price:  'R$ 600,00',
               publishDate: '06-12-1991',
@@ -32,7 +32,7 @@ class RecentAnnoucements extends PureComponent {
               address: 'Belo Horizonte'
           },
           {
-              image: 'https://img.olx.com.br/thumbs256x256/83/830196138322724.jpg',
+              image: 'https://a-static.mlcdn.com.br/618x463/violao-nylon-acustico-valencia-4-4-vc564t/musicalcenter/valenciavc564t/05fb2cb44b32aea20d111fe29c67e21e.jpg',
               title: 'Violão',
               price:  'R$ 600,00',
               publishDate: '06-12-1991',
