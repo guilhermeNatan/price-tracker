@@ -36,7 +36,7 @@ const styles = theme => ({
         backgroundColor: colors.footer,
         height: '20vh',
         width: '100%',
-        marginTop: '5%',
+        marginTop: '10%',
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column'
