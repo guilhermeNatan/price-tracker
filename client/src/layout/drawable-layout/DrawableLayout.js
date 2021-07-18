@@ -25,7 +25,7 @@ import SignUpFormFieldsSpecifications
     from "../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../reuse-components/SignUpFormFields";
 import {connect} from 'react-redux';
-import {asyncGetUserDetails} from "../../actions/userAction";
+import {asyncGetUserDetails, logout} from "../../actions/userAction";
 import AuthService from "../../service/AuthService";
 import _ from 'lodash';
 import {ACCESS_TOKEN} from "../../constants/Endpoints";
@@ -81,7 +81,7 @@ const DrawableLayout = ({children, history, asyncGetUserDetails, user}) => {
                         </Typography>
 
                         {
-                            !_.isEmpty(user) && <UserMenu/>
+                            !_.isEmpty(user) && <UserMenu logout={logout}/>
                         }
                         {
                             _.isEmpty(user) && <>
@@ -144,4 +144,4 @@ const DrawableLayout = ({children, history, asyncGetUserDetails, user}) => {
 }
 
 const mapStateToProps = state => ({user: state.user});
-export default connect(mapStateToProps, {asyncGetUserDetails})(DrawableLayout);
+export default connect(mapStateToProps, {asyncGetUserDetails, logout})(DrawableLayout);

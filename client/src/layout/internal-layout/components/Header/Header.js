@@ -11,7 +11,7 @@ import LoginFormFieldsSpecifications
   from "../../../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
 import {LoginForm} from "../../../../reuse-components/LoginForm";
 import AuthService from "../../../../service/AuthService";
-import {asyncGetUserDetails, showMessageAct} from "../../../../actions";
+import {asyncGetUserDetails, showMessageAct, logout} from "../../../../actions";
 import SignUpFormFieldsSpecifications
   from "../../../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../../../reuse-components/SignUpFormFields";
@@ -29,25 +29,28 @@ class Header extends Component {
 
   setLoginErrorMessage = (loginErrorMessage) => this.setState({loginErrorMessage});
   setSignupErrorMessage = (signupErrorMessage) => this.setState({signupErrorMessage});
+
+  componentDidMount() {
+    const {asyncGetUserDetails} = this.props;
+    asyncGetUserDetails();
+  }
+
   render() {
 
     const makeLogin = (values, closeDialog) => {
+      const {asyncGetUserDetails} = this.props;
       const getUserDetailsAfterLogin = () => asyncGetUserDetails(closeDialog);
       AuthService.signin(values, getUserDetailsAfterLogin, (error) => this.setLoginErrorMessage(error.response.data.mensagem))
     }
     const makeSignup = (values, closeDialog) => {
-      const {showMessageAct} = this.props;
-
-      AuthService.signup(values, ()=>showMessageAct({
-        showMessage: true,
-        type: 'success',
-        text: 'Obrigado por se cadastrar'
-
-      }), (error) => this.setSignupErrorMessage(error.response.data.mensagem))
+      const {showMessageAct, asyncGetUserDetails} = this.props;
+      const getUserDetailsAfterLogin = () => asyncGetUserDetails(closeDialog);
+      AuthService.signup(values, getUserDetailsAfterLogin, (error) => this.setSignupErrorMessage(error.response.data.mensagem))
     }
 
-    const { classes, user, history } = this.props;
-    const { loginErrorMessage, signupErrorMessage } = this.state;
+    const { classes, user, history, logout } = this.props;
+    const { loginErrorMessage, signupErrorMessage  } = this.state;
+
     return (
 
       <AppBar position="fixed" className={classes.appBar}>
@@ -79,7 +82,7 @@ class Header extends Component {
           </div>
 
           {
-            !_.isEmpty(user) && <UserMenu/>
+            !_.isEmpty(user) && <UserMenu logout={logout} />
           }
           {
             _.isEmpty(user) && <>
@@ -117,5 +120,5 @@ class Header extends Component {
 
 const mapStateToProps = state => ({ parametros: state.parametros, user: state.user });
 const router = withRouter(Header);
-export default connect(mapStateToProps, {asyncGetUserDetails, showMessageAct})(router);
+export default connect(mapStateToProps, {asyncGetUserDetails, showMessageAct, logout})(router);
 

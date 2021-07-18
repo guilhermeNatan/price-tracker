@@ -18,10 +18,12 @@ export default class AuthService {
 
     static signup =  async (values, onSuccess, onError) =>
         await ServiceUtil.makePostRequest(values, `${AUTH.signup}`,
-            () => {
-                localStorage.removeItem(ACCESS_TOKEN);
+            (response) => {
+                localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
                 onSuccess()
             },
             onError
         )
+
+    static logout = () => localStorage.removeItem(ACCESS_TOKEN);
 }

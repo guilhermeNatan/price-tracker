@@ -4,6 +4,7 @@
 
 import ServiceUtil from "../service/ServiceUtil";
 import {ACCESS_TOKEN, AUTH, USER} from "../constants/Endpoints";
+import AuthService from "../service/AuthService";
 
 
 
@@ -23,4 +24,12 @@ export const asyncGetUserDetails =  (onSuccess, onError) => async dispacth => {
         },
         onError
     )
+};
+
+export const LOGOUT = 'LOGOUT';
+export const logout = () => {
+    AuthService.logout();
+    return ({
+        type: LOGOUT
+    })
 };
