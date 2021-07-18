@@ -44,7 +44,7 @@ public class AuthController
     Authentication authentication = authService.getAuthentication(signUpClientRequest.getEmail(),
       signUpClientRequest.getPassword());
     String jwt = authService.getJasonWebToken(authentication);
-    return ResponseEntity.ok(jwt);
+    return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
   }
 
   /**
@@ -53,7 +53,7 @@ public class AuthController
    * @return ResponseEntity .
    */
   @PostMapping(Path.Auth.FORGOTPASSWORD)
-  public ResponseEntity<?> forgotPasswordLeitor(@Valid @RequestBody ForgotPassword forgotPassword)
+  public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPassword forgotPassword)
   {
     authService.sendEmailRecoverPassword(forgotPassword);
     return ResponseEntity.ok(new ApiResponse(true, forgotPassword.getEmail()));
@@ -64,7 +64,7 @@ public class AuthController
    * @return ResponseEntity .
    */
   @PostMapping(Path.Auth.RESETPASSWORD)
-  public ResponseEntity<?> resetPasswordLeitor(@Valid @RequestBody ResetPassword resetPassword)
+  public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPassword resetPassword)
   {
     authService.resetPassword(resetPassword);
     return ResponseEntity.ok(new ApiResponse(true, "Senha alterada com sucesso"));
