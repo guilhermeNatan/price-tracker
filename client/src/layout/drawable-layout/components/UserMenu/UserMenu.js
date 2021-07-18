@@ -3,6 +3,7 @@ import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from "prop-types";
+import {BARRA} from "../../../../constants/RoutePaths";
 
 
 class UserMenu extends Component {
@@ -22,10 +23,16 @@ class UserMenu extends Component {
     this.setAnchorEl(null);
   };
 
+  logout= () => {
+    const {logout, history} = this.props;
+    logout();
+    history.push(BARRA);
+  }
+
 
   render() {
     const {anchorEl} = this.state;
-    const {logout} = this.props;
+
     return (
         <div>
           <PersonOutlineTwoToneIcon  aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick} />
@@ -38,7 +45,7 @@ class UserMenu extends Component {
           >
             <MenuItem onClick={this.handleClose}>Profile</MenuItem>
             <MenuItem onClick={this.handleClose}>My account</MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem onClick={this.logout}>Logout</MenuItem>
           </Menu>
         </div>
     );
@@ -48,5 +55,6 @@ class UserMenu extends Component {
 
 UserMenu.propTypes = {
   logout: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 export default UserMenu;

@@ -81,7 +81,7 @@ const DrawableLayout = ({children, history, asyncGetUserDetails, user}) => {
                         </Typography>
 
                         {
-                            !_.isEmpty(user) && <UserMenu logout={logout}/>
+                            !_.isEmpty(user) && <UserMenu logout={logout} history={history}/>
                         }
                         {
                             _.isEmpty(user) && <>

@@ -82,7 +82,7 @@ class Header extends Component {
           </div>
 
           {
-            !_.isEmpty(user) && <UserMenu logout={logout} />
+            !_.isEmpty(user) && <UserMenu logout={logout} history={history} />
           }
           {
             _.isEmpty(user) && <>

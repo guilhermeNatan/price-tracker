@@ -12,7 +12,7 @@ import {ConfirmEmailScreen} from "../pages/ConfirmEmail";
 import {AUTH, BARRA, SEARCH} from "../constants/RoutePaths";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import {closseMessageAct} from '../actions';
+import {closseMessageAct, asyncGetUserDetails} from '../actions';
 import {InternalLayout} from "../layout/internal-layout";
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
@@ -63,9 +63,14 @@ const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
 const confirmEmail = renderizarComLayoutPadrao(ConfirmEmailScreen);
 
 class Rotas extends Component{
+    componentDidMount() {
+        const {asyncGetUserDetails} = this.props;
+        asyncGetUserDetails();
+    }
 
-  render() {
-    const { message, closseMessageAct} = this.props;
+    render() {
+    const { message, closseMessageAct, user} = this.props;
+
     return (
         <div>
             <Switch>
@@ -75,7 +80,8 @@ class Rotas extends Component{
                 {/*<Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>*/}
                 {/*<Route exact path={LOGIN} component={login}/>*/}
                 <Route exact path={`${AUTH.confirmEmail}/:confirmEmailToken`}
-                       component={confirmEmail}/>
+                       component={confirmEmail} user={this.props.user}/>
+
 
                 <Route render={() => <div>Ops : página não encontrada</div>}/>
             </Switch>
@@ -91,5 +97,6 @@ class Rotas extends Component{
 }
 
 
-const mapStateToProps = state => ({ message: state.message });
-export default connect(mapStateToProps, {closseMessageAct})(Rotas);
+
+const mapStateToProps = state => ({ message: state.message, user: state.user });
+export default connect(mapStateToProps, {asyncGetUserDetails, closseMessageAct})(Rotas);
