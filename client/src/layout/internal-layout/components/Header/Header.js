@@ -15,7 +15,9 @@ import {asyncGetUserDetails, showMessageAct, logout} from "../../../../actions";
 import SignUpFormFieldsSpecifications
   from "../../../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../../../reuse-components/SignUpFormFields";
-import {BARRA} from "../../../../constants/RoutePaths";
+import {BARRA, LOGIN} from "../../../../constants/RoutePaths";
+import Button from "@material-ui/core/Button";
+import colors from "../../../../theme/colors";
 
 class Header extends Component {
   constructor(props, context) {
@@ -65,7 +67,7 @@ class Header extends Component {
           }}>
             <button style={{
               border: "none", background: "none",
-              color: "inherit",
+              color: colors.secondaryTextColor,
               padding: 0,
               font: "inherit",
               cursor: "pointer",
@@ -74,7 +76,7 @@ class Header extends Component {
             }}>
               <Typography variant="h4"
                           onClick={() => history.push(BARRA)}
-                          color="inherit"
+                          color={colors.secondaryTextColor}
                           noWrap>
                 {'Troca e Vendas Capelinha'}
               </Typography>
@@ -86,17 +88,11 @@ class Header extends Component {
           }
           {
             _.isEmpty(user) && <>
-              <FormDialog
-                  mainButtonName={"Login"}
-                  title={"Login"}
-                  confirmButtonName={'Entrar'}
-                  formikOptions={{
-                    ...LoginFormFieldsSpecifications,
-                    onSubmit: makeLogin
-                  }}
-                  errorMessage={loginErrorMessage}
-                  renderContent={(formik) => <LoginForm formik={formik}/>}
-              />
+              <Button color="secondary"
+                      onClick={() => history.push(LOGIN)}
+              >
+                Login
+              </Button>
 
               <FormDialog
                   mainButtonName={"Cadastre-se"}

@@ -74,13 +74,23 @@ class Rotas extends Component{
     return (
         <div>
             <Switch>
-                <Route exact path={BARRA} component={home}/>
-                <Route exact path={SEARCH.search} component={pesquisa}/>
+                <Route exact
+                       path={BARRA}
+                       component={home}/>
+                <Route exact
+                       path={SEARCH.search}
+                       component={pesquisa}/>
+                <Route exact
+                       path={LOGIN}
+                       component={login}/>
+
+                <Route exact
+                       path={`${AUTH.confirmEmail}/:confirmEmailToken`}
+                       component={confirmEmail}
+                       user={this.props.user}/>
+
 
                 {/*<Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>*/}
-                {/*<Route exact path={LOGIN} component={login}/>*/}
-                <Route exact path={`${AUTH.confirmEmail}/:confirmEmailToken`}
-                       component={confirmEmail} user={this.props.user}/>
 
 
                 <Route render={() => <div>Ops : página não encontrada</div>}/>

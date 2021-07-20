@@ -1,94 +1,71 @@
-import React, { Component } from 'react';
-import Bootstrap4Theme from 'react-jsonschema-form-bs4';
+import React from 'react';
 import Card from '@material-ui/core/es/Card';
 import CardHeader from '@material-ui/core/es/CardHeader';
 import CardContent from '@material-ui/core/es/CardContent';
 import styles from './LoginStyle'
-import {LOGIN} from "../../constants/RoutePaths";
-const schema = {
-  type: 'object',
-  required: ['email', 'password'],
-  properties: {
-    email: { type: 'string', title: 'Email' },
-    password: { type: 'string', title: 'Senha' },
-
-  },
-};
-
-
-const uiSchema = {
-  email: {
-    'ui:widget': 'email',
-  },
-  password: {
-    'ui:widget': 'password',
-  },
-};
+import {LoginForm} from "../../reuse-components/LoginForm";
+import {useFormik} from "formik";
+import LoginFormFieldsSpecifications
+  from "../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
+import Button from "@material-ui/core/Button";
+import AuthService from "../../service/AuthService";
+import {withRouter} from "react-router-dom";
+import {connect} from 'react-redux';
+import {asyncGetUserDetails, logout, showMessageAct} from "../../actions";
+import {BARRA} from "../../constants/RoutePaths";
 
 
+function Login({asyncGetUserDetails, history}) {
+  const [loginErrorMessage, setLoginErrorMessage] = React.useState(false);
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      erroMessage: '',
-    };
+
+  const makeLogin = (values) => {
+    const getUserDetailsAfterLogin = () => asyncGetUserDetails(() => history.push(BARRA));
+    AuthService.signin(values, getUserDetailsAfterLogin, (error) => setLoginErrorMessage(error.response.data.mensagem))
   }
 
-  componentDidMount() {
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     const { history } = this.props;
-    //     return history.push('/contatos');
-    //   }
-    // });
-  }
+  const formik = useFormik({
+    ...LoginFormFieldsSpecifications,
+    onSubmit: makeLogin
+  })
+  return (
+      <div style={styles.container}>
+        <Card style={styles.card}>
+          <CardHeader
+              title="Troca e vendas Capelinha"
+          />
+          <CardContent>
+            <form onSubmit={ formik.handleSubmit}>
+              <LoginForm
+                  formik={formik}
+              />
+              <Button  type="submit"
+                       color="primary"
+                       variant="contained"
+                       style={{marginTop: '3vh'}}
+                       autoFocus>
+                Entrar
+              </Button>
+            </form>
 
-    onSubmit = ({ formData }) => {
-      const { history } = this.props;
-      if (formData) {
-        return history.push(LOGIN)
-        // ServiceUtil.tryLogin(formData)
-        //   .then(() => {
-        //     const { history } = this.props;
-        //     return history.push(LOGIN);
-        //   })
-        //   .catch((error) => {
-        //     console.log(error.mensage);
-        //     this.setState({ erroMessage: error.message });
-        //   });
-      }
-    }
+            <div style={{color: 'red'}}> {loginErrorMessage}</div>
 
-    render() {
-      const { erroMessage } = this.state;
-      return (
-        <div style={styles.container}>
-          <Card style={styles.card}>
-            <CardHeader
-              title="Melhores do ano Sou Mais Minas"
-            />
-            <CardContent>
-              <Bootstrap4Theme
-                onSubmit={this.onSubmit}
-                schema={schema}
-                uiSchema={uiSchema}
-                {...this.props}
-              >
-                <div>
-                  <button className="btn btn-info" style={{ height: 45, width: 150 }} type="submit">Entrar</button>
-                </div>
-              </Bootstrap4Theme>
 
-              <div>
-                {erroMessage}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      );
-    }
+            <Button
+                     color="secondary"
+                     style={{marginTop: '3vh'}}
+                     autoFocus>
+              Esqueceu sua senha?
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+  )
 }
 
+// export default Login;
 
-export default Login;
+const mapStateToProps = state => ({ parametros: state.parametros, user: state.user });
+const router = withRouter(Login);
+export default connect(mapStateToProps, {asyncGetUserDetails, showMessageAct, logout})(router);
+
