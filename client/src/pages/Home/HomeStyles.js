@@ -1,6 +1,7 @@
+import colors from '../../theme/colors'
 const styles = {
   container: {
-    backgroundColor: '#2a4dad',
+    backgroundColor: colors.primaryColor,
     minHeight: '20vh',
     padding: '3%',
     display: 'flex',

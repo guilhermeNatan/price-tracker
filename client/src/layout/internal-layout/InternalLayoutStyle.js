@@ -18,6 +18,7 @@ const styles = theme => ({
         [theme.breakpoints.up('sm')]: {
             width: `calc(100% - ${drawerWidth}px)`,
         },
+        backgroundColor: colors.primaryDarkColor
     },
     menuButton: {
         marginRight: 20,

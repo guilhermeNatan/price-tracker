@@ -1,4 +1,4 @@
-import  {Colors} from "../../layout/colors";
+import colors from "../../theme/colors";
 
 
 export default {
@@ -6,7 +6,7 @@ export default {
         display: 'flex',
         justifyContent: 'center',
         paddingTop: '5%',
-        backgroundColor: Colors.secondaryDarkColor,
+        backgroundColor: colors.primaryColor,
         height: '100vh',
         width: '100%',
         alignItems: 'center',

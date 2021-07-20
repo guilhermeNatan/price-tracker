@@ -4,6 +4,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from "prop-types";
 import {BARRA} from "../../../../constants/RoutePaths";
+import colors from "../../../../theme/colors";
 
 
 class UserMenu extends Component {
@@ -35,7 +36,7 @@ class UserMenu extends Component {
 
     return (
         <div>
-          <PersonOutlineTwoToneIcon  aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick} />
+          <PersonOutlineTwoToneIcon style={{color: colors.secondaryTextColor}} aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClick} />
           <Menu
               id="simple-menu"
               anchorEl={anchorEl}
