@@ -25,5 +25,14 @@ export default class AuthService {
             onError
         )
 
+
     static logout = () => localStorage.removeItem(ACCESS_TOKEN);
+
+    static  forgotPassword = async (values, onSuccess, onError) =>
+        await ServiceUtil.makePostRequest(values, `${AUTH.forgotpassword}`,
+            () => {
+                onSuccess()
+            },
+            onError
+        )
 }

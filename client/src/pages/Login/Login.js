@@ -12,7 +12,7 @@ import AuthService from "../../service/AuthService";
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 import {asyncGetUserDetails, logout, showMessageAct} from "../../actions";
-import {BARRA} from "../../constants/RoutePaths";
+import {AUTH, BARRA} from "../../constants/RoutePaths";
 
 
 function Login({asyncGetUserDetails, history}) {
@@ -52,6 +52,7 @@ function Login({asyncGetUserDetails, history}) {
 
 
             <Button
+                      onClick={()=>history.push(AUTH.forgotPassword)}
                      color="secondary"
                      style={{marginTop: '3vh'}}
                      autoFocus>

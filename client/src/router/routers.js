@@ -5,6 +5,7 @@ import {createBrowserHistory} from 'history';
 import '../resources/css/style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {Login} from '../pages/Login';
+import {ForgotPasswordScreen} from '../pages/ForgotPassword';
 import {SearchScreen} from "../pages/Search";
 import {Home} from "../pages/Home";
 import {GameDetailScreen} from "../pages/GameDetail";
@@ -57,6 +58,7 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 };
 
 const login = renderizarComLayoutLogin(Login);
+const forgotPassword = renderizarComLayoutLogin(ForgotPasswordScreen);
 const pesquisa = renderizarComLayoutPadrao(SearchScreen);
 const home = renderizarComLayoutPadrao(Home);
 const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
@@ -85,9 +87,13 @@ class Rotas extends Component{
                        component={login}/>
 
                 <Route exact
+                       path={AUTH.forgotPassword}
+                       component={forgotPassword}/>
+
+                <PrivateRoute exact
+                       user={user}
                        path={`${AUTH.confirmEmail}/:confirmEmailToken`}
-                       component={confirmEmail}
-                       user={this.props.user}/>
+                       component={confirmEmail} />
 
 
                 {/*<Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>*/}
