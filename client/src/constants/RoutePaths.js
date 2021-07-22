@@ -3,7 +3,8 @@ export const GAME_DETAIL = '/game-detail';
 
 export const AUTH = {
         confirmEmail: '/validate-email',
-        forgotPassword: '/forgot-password'
+        forgotPassword: '/forgot-password',
+        resetPassword: '/reset-password/:token'
 }
 
 

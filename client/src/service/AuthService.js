@@ -34,5 +34,14 @@ export default class AuthService {
                 onSuccess()
             },
             onError
-        )
+        );
+
+    static  resetPassword = async (values, onSuccess, onError) =>
+        await ServiceUtil.makePostRequest(values, `${AUTH.resetpassword}`,
+            (resp) => {
+            localStorage.removeItem(ACCESS_TOKEN)
+            onSuccess(resp)
+            },
+            onError
+        );
 }

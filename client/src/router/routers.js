@@ -6,6 +6,7 @@ import '../resources/css/style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {Login} from '../pages/Login';
 import {ForgotPasswordScreen} from '../pages/ForgotPassword';
+import {ResetPasswordScreen} from '../pages/ResetPassword';
 import {SearchScreen} from "../pages/Search";
 import {Home} from "../pages/Home";
 import {GameDetailScreen} from "../pages/GameDetail";
@@ -59,6 +60,8 @@ export const renderizarComLayoutLogin = Componente => (props) => {
 
 const login = renderizarComLayoutLogin(Login);
 const forgotPassword = renderizarComLayoutLogin(ForgotPasswordScreen);
+const resetPassword = renderizarComLayoutLogin(ResetPasswordScreen);
+
 const pesquisa = renderizarComLayoutPadrao(SearchScreen);
 const home = renderizarComLayoutPadrao(Home);
 const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
@@ -89,6 +92,10 @@ class Rotas extends Component{
                 <Route exact
                        path={AUTH.forgotPassword}
                        component={forgotPassword}/>
+
+                <Route exact
+                       path={AUTH.resetPassword}
+                       component={resetPassword}/>
 
                 <PrivateRoute exact
                        user={user}
