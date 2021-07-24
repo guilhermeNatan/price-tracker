@@ -14,6 +14,7 @@ export default {
 
     },
     card: {
-        width: '50%',
+        width: '25%',
+        padding: '3%',
     },
 };

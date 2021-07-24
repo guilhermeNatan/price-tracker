@@ -31,6 +31,10 @@ theme.props = {
     MuiButton: {
         disableElevation: true,
     },
+    MuiTextField: {
+        variant: 'outlined',
+        margin: 'normal'
+    }
 
 }
 theme.overrides = {
@@ -73,7 +77,8 @@ theme.overrides = {
         h6: {
             fontSize: '0.75rem'
         }
-    }
+    },
+
 
 }
 export default theme;

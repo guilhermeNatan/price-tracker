@@ -9,6 +9,12 @@ const styles = {
     height: '100vh',
     width: '100%',
     alignItems: 'center',
+    flexDirection: 'column'
+  },
+  card: {
+    width: '25%',
+    padding: '3%',
+
   },
 };
 

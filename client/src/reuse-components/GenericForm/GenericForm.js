@@ -5,7 +5,8 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {useFormik} from "formik";
 import {withStyles} from "@material-ui/core/styles";
-import {costumStyles} from './GenericFormStyles';
+import styles, {costumStyles} from './GenericFormStyles';
+
 
 function GenericForm({
                          applicationParams,
@@ -16,6 +17,8 @@ function GenericForm({
                          loadingAct,
                          submitButtonProps = {name: 'Entrar'},
                          classes,
+                         actions=[],
+                        containerActionsStyle
                      }) {
 
     const submit = (values) => {
@@ -42,14 +45,7 @@ function GenericForm({
 
             <div style={{color: 'red'}}> {errorMessage}</div>
 
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: '3vh'
-            }}>
-
+            <div style={{...styles.containerButtons, ...containerActionsStyle}}>
 
                 {
                     !applicationParams.loading &&
@@ -64,10 +60,25 @@ function GenericForm({
                         {...submitButtonProps}
                     >
                         {submitButtonProps.name}
-                    </Button>}
+                    </Button>
+                }
+
                 {
                     applicationParams.loading &&
                     <CircularProgress/>
+                }
+
+                {
+                    actions.map((act, index) =>  <Button
+                        key={"b_"+index }
+                        color="secondary"
+                        classes={{
+                            root: classes.button
+                        }}
+                        {...act}
+                        >
+                        {act.name}
+                    </Button>)
                 }
 
 
