@@ -1,72 +1,55 @@
 import React from 'react';
 import Card from '@material-ui/core/es/Card';
-import CardHeader from '@material-ui/core/es/CardHeader';
 import CardContent from '@material-ui/core/es/CardContent';
 import styles from './LoginStyle'
 import {LoginForm} from "../../reuse-components/LoginForm";
-import {useFormik} from "formik";
 import LoginFormFieldsSpecifications
-  from "../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
+    from "../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
 import Button from "@material-ui/core/Button";
 import AuthService from "../../service/AuthService";
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
-import {asyncGetUserDetails, logout, showMessageAct} from "../../actions";
+import {asyncGetUserDetails} from "../../actions";
 import {AUTH, BARRA} from "../../constants/RoutePaths";
-
+import {GenericForm} from "../../reuse-components/GenericForm";
+import Typography from "@material-ui/core/Typography";
+import colors from "../../theme/colors";
 
 function Login({asyncGetUserDetails, history}) {
-  const [loginErrorMessage, setLoginErrorMessage] = React.useState(false);
 
-
-  const makeLogin = (values) => {
-    const getUserDetailsAfterLogin = () => asyncGetUserDetails(() => history.push(BARRA));
-    AuthService.signin(values, getUserDetailsAfterLogin, (error) => setLoginErrorMessage(error.response.data.mensagem))
-  }
-
-  const formik = useFormik({
-    ...LoginFormFieldsSpecifications,
-    onSubmit: makeLogin
-  })
   return (
       <div style={styles.container}>
+          <Typography variant="h1"  style={{fontSize: 50, color: colors.secondaryTextColor, marginBottom: '5vh' }}>
+              Shopping do Vale
+          </Typography>
         <Card style={styles.card}>
-          <CardHeader
-              title="Troca e vendas Capelinha"
-          />
           <CardContent>
-            <form onSubmit={ formik.handleSubmit}>
-              <LoginForm
-                  formik={formik}
-              />
-              <Button  type="submit"
-                       color="primary"
-                       variant="contained"
-                       style={{marginTop: '3vh'}}
-                       autoFocus>
-                Entrar
+
+            <GenericForm
+                renderForm={(formik) => (<LoginForm formik={formik}/>)}
+                FormFieldsSpecifications={LoginFormFieldsSpecifications}
+                onSubmit={AuthService.signin}
+                onSuccess={() => asyncGetUserDetails(() => history.push(BARRA))}
+            />
+
+            {
+              <Button
+
+                  onClick={()=>history.push(AUTH.forgotPassword)}
+                  color="secondary"
+                  style={{marginTop: '3vh'}}
+                  autoFocus>
+                Esqueceu sua senha?
               </Button>
-            </form>
+            }
 
-            <div style={{color: 'red'}}> {loginErrorMessage}</div>
-
-
-            <Button
-                      onClick={()=>history.push(AUTH.forgotPassword)}
-                     color="secondary"
-                     style={{marginTop: '3vh'}}
-                     autoFocus>
-              Esqueceu sua senha?
-            </Button>
           </CardContent>
         </Card>
       </div>
   )
 }
 
-// export default Login;
-
-const mapStateToProps = state => ({ parametros: state.parametros, user: state.user });
+const mapStateToProps = state => ({ applicationParams: state.applicationParams });
 const router = withRouter(Login);
-export default connect(mapStateToProps, {asyncGetUserDetails, showMessageAct, logout})(router);
+export default connect(mapStateToProps, {asyncGetUserDetails})(router);
 

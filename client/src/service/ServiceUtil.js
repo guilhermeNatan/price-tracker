@@ -15,12 +15,15 @@ export default class ServiceUtil {
 
   static prepareDataBeforeUpsert = object => omitBy(object, isNil);
 
-  static makePostRequest = async (values, url, onSuccess, onError) => {
+  static makePostRequest = async ({values, url, onSuccess, onError, beforeRequest, afterRequest}) => {
     try {
+      beforeRequest && beforeRequest();
       const respo = await axios.post(url, values);
       onSuccess && onSuccess(respo);
     } catch (error) {
       onError && onError(error)
+    }finally {
+      afterRequest && afterRequest()
     }
   }
 
