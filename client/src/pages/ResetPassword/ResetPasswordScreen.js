@@ -7,7 +7,7 @@ import Card from '@material-ui/core/es/Card';
 import CardHeader from '@material-ui/core/es/CardHeader';
 import CardContent from '@material-ui/core/es/CardContent';
 import Button from "@material-ui/core/Button";
-import {BARRA, LOGIN} from "../../constants/RoutePaths";
+import {AUTH, BARRA} from "../../constants/RoutePaths";
 import AuthService from "../../service/AuthService";
 import {useFormik} from "formik";
 import {ResetPasswordForm} from "../../reuse-components/ResetPasswordForm";
@@ -62,7 +62,7 @@ function  ResetPasswordScreen (props) {
                 <div>{success}</div>
                 <Button type="submit"
                         color="primary"
-                        onClick={()=>props.history.push(LOGIN)}
+                        onClick={()=>props.history.push(AUTH.login)}
                         variant="contained"
                         style={{marginTop: '3vh'}}
                         autoFocus>

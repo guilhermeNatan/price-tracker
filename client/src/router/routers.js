@@ -86,7 +86,7 @@ class Rotas extends Component{
                        path={SEARCH.search}
                        component={pesquisa}/>
                 <Route exact
-                       path={LOGIN}
+                       path={AUTH.login}
                        component={login}/>
 
                 <Route exact
