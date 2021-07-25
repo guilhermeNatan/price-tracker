@@ -14,14 +14,11 @@ class PrivateRoute extends Component {
   render() {
     const { component: Comp, ...rest } = this.props;
     const { user } = this.props;
-    if ( _.isEmpty(user)) {
-      return <div>Verificando acesso...</div>;
-    }
     return (
       <Route
         {...rest}
         render={(props) => {
-          if (user) {
+          if (!_.isEmpty(user)) {
             return (
               <React.Fragment>
                 <Comp {...props} {...rest} />

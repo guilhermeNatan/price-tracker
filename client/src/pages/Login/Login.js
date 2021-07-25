@@ -17,7 +17,9 @@ function Login({asyncGetUserDetails, history}) {
 
   return (
       <div style={styles.container}>
-         <Logo />
+          <Logo typographyProps={{
+              onClick: () => history.push(BARRA)
+          }}/>
         <Card style={styles.card}>
           <CardContent>
             <GenericForm

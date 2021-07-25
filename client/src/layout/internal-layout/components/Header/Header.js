@@ -1,23 +1,15 @@
 import React, {Component} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import {withRouter} from 'react-router-dom';
 import connect from 'react-redux/es/connect/connect';
 import _ from "lodash";
 import {UserMenu} from "../../../drawable-layout/components/UserMenu";
-import {FormDialog} from "../../../../reuse-components/FormDialog";
-import LoginFormFieldsSpecifications
-  from "../../../../reuse-components/LoginForm/LoginFormFieldsSpecifications";
-import {LoginForm} from "../../../../reuse-components/LoginForm";
 import AuthService from "../../../../service/AuthService";
-import {asyncGetUserDetails, showMessageAct, logout} from "../../../../actions";
-import SignUpFormFieldsSpecifications
-  from "../../../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
-import {SignUpFormFields} from "../../../../reuse-components/SignUpFormFields";
-import {BARRA, LOGIN} from "../../../../constants/RoutePaths";
+import {asyncGetUserDetails, logout, showMessageAct} from "../../../../actions";
+import {AD_FORM, AUTH, BARRA} from "../../../../constants/RoutePaths";
 import Button from "@material-ui/core/Button";
-import colors from "../../../../theme/colors";
+import {Logo} from "../../../../reuse-components/Logo";
 
 class Header extends Component {
   constructor(props, context) {
@@ -65,46 +57,43 @@ class Header extends Component {
             alignItems: 'flex-start',
             flex: 1
           }}>
-            <button style={{
-              border: "none", background: "none",
-              color: colors.secondaryTextColor,
-              padding: 0,
-              font: "inherit",
-              cursor: "pointer",
-              outline: "inherit",
-
-            }}>
-              <Typography variant="h4"
-                          onClick={() => history.push(BARRA)}
-                          color={colors.secondaryTextColor}
-                          noWrap>
-                {'Troca e Vendas Capelinha'}
-              </Typography>
-            </button>
+            <Logo
+                typographyProps={{
+                  onClick: () => history.push(BARRA),
+                  style:{fontSize: '1.5rem'}
+                }}
+                containerStyles={{margin: 0}}
+            />
           </div>
-
+          <Button color="secondary"
+                  variant={"contained"}
+                  style={{
+                    marginRight: '4vw'
+                  }}
+                  onClick={() => history.push(AD_FORM)}
+          >
+            Anunciar
+          </Button>
           {
-            !_.isEmpty(user) && <UserMenu logout={logout} history={history} />
+            !_.isEmpty(user) && <>
+
+              <UserMenu logout={logout} history={history} />
+            </>
           }
           {
             _.isEmpty(user) && <>
               <Button color="secondary"
-                      onClick={() => history.push(LOGIN)}
+                      onClick={() => history.push(AUTH.login)}
               >
                 Login
               </Button>
 
-              <FormDialog
-                  mainButtonName={"Cadastre-se"}
-                  title={"Cadastre-se"}
-                  confirmButtonName={'Confirmar'}
-                  errorMessage={signupErrorMessage}
-                  formikOptions={{
-                    ...SignUpFormFieldsSpecifications,
-                    onSubmit: makeSignup
-                  }}
-                  renderContent={(formik) => <SignUpFormFields formik={formik}/>}
-              />
+              <Button color="secondary"
+                      onClick={() => history.push(AUTH.signup)}
+              >
+                Cadastre-se
+              </Button>
+
             </>
           }
         </Toolbar>
