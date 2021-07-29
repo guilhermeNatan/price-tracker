@@ -14,3 +14,5 @@ export const SEARCH = {
 }
 
 export const BARRA = "/"
+
+export const  AD_FORM = "/ad/form"

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import categoryMenuStyles from './CategoryMenuStyles';
 import Typography from "@material-ui/core/Typography";
-
+import categories from './categorias';
 import {
     basketBallIcon,
     bedIcon,
@@ -62,59 +62,6 @@ class CategoryMenu extends PureComponent {
         )
     }
 
-    getCategories = () => {
-        return ([
-            {
-                name: 'Imóveis',
-                icon: homeIcon,
-                id: 'IMOVEIS',
-            },
-            {
-                name: 'Auto e peças',
-                icon: carIcon,
-                id: 'AUTO_E_PECAS',
-
-            },
-            {
-                name: 'Para a sua casa',
-                icon: bedIcon,
-                id: 'PARA_SUA_CASA'
-            },
-            {
-                name: 'Eletrônicos e celulares',
-                icon: mobileFone,
-                id: 'ELETRONICOS_E_CELULARES'
-            },
-            {
-                name: 'Vagas de emprego',
-                icon: bussinessIcon,
-                id: 'VAGAS_DE_EMPREGO'
-            },
-            {
-                name: 'Serviços',
-                icon: toolsIcon,
-                id: 'SERVICOS'
-            },
-            {
-                name: 'Música e hobbies',
-                icon: guitarIcon,
-                id: 'MUSICA_E_HOBBIES'
-            },
-            {
-                name: 'Esportes e lazer',
-                icon: basketBallIcon,
-                id: 'ESPORTES_E_LAZER',
-            },
-            {
-                name: 'Moda e lazer',
-                icon: dressIcon,
-                id: 'MODA_E_LAZER',
-            },
-        ])
-    }
-
-
-
   render() {
       const {mediaQuery} = this.props;
       const styles = categoryMenuStyles(mediaQuery);
@@ -123,7 +70,7 @@ class CategoryMenu extends PureComponent {
     return (
       <div style={styles.container}>
           {
-              this.getCategories().map((category) => this.renderCategory(category))
+              categories.map((category) => this.renderCategory(category))
           }
       </div>
     );

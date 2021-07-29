@@ -12,12 +12,15 @@ import {SearchScreen} from "../pages/Search";
 import {Home} from "../pages/Home";
 import {GameDetailScreen} from "../pages/GameDetail";
 import {ConfirmEmailScreen} from "../pages/ConfirmEmail";
-import {AUTH, BARRA, SEARCH} from "../constants/RoutePaths";
+import {AnnounceScreen} from "../pages/Announce";
+
+import {AD_FORM, AUTH, BARRA, SEARCH} from "../constants/RoutePaths";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {closseMessageAct, asyncGetUserDetails} from '../actions';
 import {InternalLayout} from "../layout/internal-layout";
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import {PrivateRoute} from "./PrivateRoute";
 
 const history = createBrowserHistory();
 
@@ -67,6 +70,7 @@ const pesquisa = renderizarComLayoutPadrao(SearchScreen);
 const home = renderizarComLayoutPadrao(Home);
 const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
 const confirmEmail = renderizarComLayoutPadrao(ConfirmEmailScreen);
+const adForm = renderizarComLayoutPadrao(AnnounceScreen);
 
 class Rotas extends Component{
     componentDidMount() {
@@ -107,7 +111,13 @@ class Rotas extends Component{
                        component={confirmEmail} />
 
 
-                {/*<Route exact path={`${GAME_DETAIL}/:idgame`} component={gameDetail}/>*/}
+                <Route exact
+                              user={user}
+                              path={AD_FORM}
+                              component={adForm}/>
+
+
+
 
 
                 <Route render={() => <div>Ops : página não encontrada</div>}/>
