@@ -3,9 +3,11 @@
  */
 
 import * as yup from "yup";
+import _ from "lodash";
+import {initialValuesProperty,
+    validationObjectProperty} from '../PropertyForm/PropertyFormFieldsSpecifications'
 
-
-const validationSchema = yup.object({
+export const validationObject =  {
     title: yup
         .string('Título')
         .required('Campo obrigatório'),
@@ -17,31 +19,53 @@ const validationSchema = yup.object({
         .required('Campo obrigatório'),
     subcategory: yup
         .string('Sub categoria')
-        .required('Campo obrigatório'),
+        .when('category', {
+            is: (category) => !_.isEmpty(category),
+            then: yup.string().required('Field is required'),
+            otherwise: yup.string()
+        } ),
     subcategories: yup
-        .string('Sub categoria'),
+        .string('Sub categoria')
+        .when('category', {
+            is: (category) => !_.isEmpty(category),
+            then: yup.string().required('Field is required'),
+            otherwise: yup.string()
+        } ),
     files: yup.mixed().required(),
     cep: yup
         .string('Cep')
         .required('Campo obrigatório'),
+    price: yup
+        .string('Preço')
+        .required('Campo obrigatório'),
     hidePhone: yup
         .boolean('Ocultar telefone')
         .required('Campo obrigatório'),
-});
+
+    ...validationObjectProperty
+};
+
+
+export const initialValues =  {
+    title: '',
+    description: '',
+    category: null,
+    subcategory: '',
+    subcategories: [],
+    cep: '',
+    files: [],
+    ...initialValuesProperty
+};
+
+const validationSchema = yup.object(validationObject);
 
 
 export default {
-    initialValues: {
-        title: '',
-        description: '',
-        category: null,
-        subcategory: null,
-        subcategories: [],
-        cep: '',
-        files: []
-    },
+    initialValues: initialValues,
     validationSchema: validationSchema,
 };
+
+
 
 
 

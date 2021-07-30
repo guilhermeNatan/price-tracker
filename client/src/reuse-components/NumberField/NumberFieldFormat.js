@@ -6,7 +6,6 @@ const NumberFieldFormat = (props) => {
 
     // propriedade onChage é removida para que não sobrescreva o onChange do NumberFormat
     const newProps = {...props};
-    delete newProps.onChange
 
     return (
         <NumberFormat

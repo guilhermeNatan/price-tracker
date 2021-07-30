@@ -2,40 +2,13 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react';
 import { TextField } from "@material-ui/core";
 import NumberFieldFormat from "./NumberFieldFormat";
-import _ from 'lodash';
 class NumberField extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            numberformat: undefined,
-        }
-    }
-
-    handleChange = event => {
-        this.setState({ numberformat: event.target.value });
-    };
-
-    static getDerivedStateFromProps(props, state) {
-        if (!_.isEqual(props.value, state.numberformat)) {
-            return {
-                numberformat: props.value,
-            };
-        }
-        return null;
-    }
 
     render() {
-        const { numberformat } = this.state;
-
         return (
             <TextField
                 {...this.props}
-                value={numberformat}
-                onChange={(event) => {
-                    this.props.onChange(event);
-                }}
-
                 InputProps={{
                     inputComponent: NumberFieldFormat,
                     inputProps: {
