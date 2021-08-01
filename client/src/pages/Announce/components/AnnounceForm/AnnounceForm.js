@@ -8,6 +8,7 @@ import NumberField from "../../../../reuse-components/NumberField/NumberField";
 import manifest from '../../../../application_manifest.json'
 import {PropertyForm} from "../PropertyForm";
 import {CarForm} from "../CarForm";
+import {MotorcycleForm} from "../MotorcycleForm";
 
 // https://jasonwatmore.com/post/2020/09/28/react-formik-dynamic-form-example
 // https://codesandbox.io/embed/formik-example-3jfxh?fontsize=14&hidenavigation=1&theme=dark
@@ -157,7 +158,10 @@ export const AnnounceForm = ({formik}) => {
                 <CarForm formik={formik} />
             }
 
-
+            {
+                formik.values.category === 'AUTO_E_PECAS' && formik.values.subcategory === '2060' &&
+                <MotorcycleForm formik={formik} />
+            }
             <FormLabel gutterBottom variant="h5" component="h2">
                 Contato: (31) 991262778
             </FormLabel>

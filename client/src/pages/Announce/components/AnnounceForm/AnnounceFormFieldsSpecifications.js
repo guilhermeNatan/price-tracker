@@ -7,6 +7,10 @@ import _ from "lodash";
 import {initialValuesProperty,
     validationObjectProperty} from '../PropertyForm/PropertyFormFieldsSpecifications'
 import {initialValuesCar, validationObjectCar} from "../CarForm/CarFormFieldsSpecifications";
+import {
+    initialValuesMotorcycle,
+    validationObjectMotorcycle
+} from "../MotorcycleForm/MotorcycleFormFieldsSpecifications";
 
 export const validationObject =  {
     title: yup
@@ -44,7 +48,9 @@ export const validationObject =  {
         .required('Campo obrigatório'),
 
     ...validationObjectProperty,
-    ...validationObjectCar
+    ...validationObjectCar,
+    ...validationObjectMotorcycle
+
 };
 
 
@@ -57,7 +63,8 @@ export const initialValues =  {
     cep: '',
     files: [],
     ...initialValuesProperty,
-    ...initialValuesCar
+    ...initialValuesCar,
+    ...initialValuesMotorcycle
 };
 
 const validationSchema = yup.object(validationObject);
@@ -67,6 +74,7 @@ export default {
     initialValues: initialValues,
     validationSchema: validationSchema,
 };
+
 
 
 
