@@ -7,6 +7,7 @@ import _ from "lodash";
 import NumberField from "../../../../reuse-components/NumberField/NumberField";
 import manifest from '../../../../application_manifest.json'
 import {PropertyForm} from "../PropertyForm";
+import {CarForm} from "../CarForm";
 
 // https://jasonwatmore.com/post/2020/09/28/react-formik-dynamic-form-example
 // https://codesandbox.io/embed/formik-example-3jfxh?fontsize=14&hidenavigation=1&theme=dark
@@ -55,7 +56,7 @@ export const AnnounceForm = ({formik}) => {
             <DropzoneArea
                 onChange={(files) => formik.setFieldValue("files", files)}
                 dropzoneText={"Enviar fotos"}
-                filesLimit={5}
+                filesLimit={6}
             />
 
 
@@ -151,6 +152,10 @@ export const AnnounceForm = ({formik}) => {
                 formik.values.category === 'IMOVEIS' &&
                 <PropertyForm formik={formik}/>
             }
+            {
+                formik.values.category === 'AUTO_E_PECAS' && formik.values.subcategory === '2020' &&
+                <CarForm formik={formik} />
+            }
 
 
             <FormLabel gutterBottom variant="h5" component="h2">
@@ -164,7 +169,7 @@ export const AnnounceForm = ({formik}) => {
 
             <FormGroup row>
                 <FormControlLabel
-                    control={<Checkbox checked={formik.values.hidePhone}
+                    control={<Checkbox checked={formik.values.showContactNumber}
                                        name="hidePhone"
                                        defaultChecked={true}
                                        onChange={formik.handleChange}/>}
