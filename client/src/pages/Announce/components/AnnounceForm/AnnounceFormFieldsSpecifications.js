@@ -11,6 +11,14 @@ import {
     initialValuesMotorcycle,
     validationObjectMotorcycle
 } from "../MotorcycleForm/MotorcycleFormFieldsSpecifications";
+import {
+    initialValuesComputers,
+    validationObjectComputers
+} from "../ComputersForm/ComputersFormFieldsSpecifications";
+import {
+    initialValuesSmartphones,
+    validationObjectSmartphones
+} from "../SmartphonesForm/SmartphonesFormFieldsSpecifications";
 
 export const validationObject =  {
     title: yup
@@ -49,8 +57,9 @@ export const validationObject =  {
 
     ...validationObjectProperty,
     ...validationObjectCar,
-    ...validationObjectMotorcycle
-
+    ...validationObjectMotorcycle,
+    ...validationObjectComputers,
+    ...validationObjectSmartphones
 };
 
 
@@ -61,10 +70,13 @@ export const initialValues =  {
     subcategory: '',
     subcategories: [],
     cep: '',
+    price: '',
     files: [],
     ...initialValuesProperty,
     ...initialValuesCar,
-    ...initialValuesMotorcycle
+    ...initialValuesMotorcycle,
+    ...initialValuesComputers,
+    ...initialValuesSmartphones
 };
 
 const validationSchema = yup.object(validationObject);
