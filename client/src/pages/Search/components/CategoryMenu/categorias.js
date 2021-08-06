@@ -132,7 +132,12 @@ export default [
             },
             {
                 "code": "1160",
-                "label": "Games",
+                "label": "Jogos",
+                "max_images": 6
+            },
+            {
+                "code": "1170",
+                "label": "Acessórios",
                 "max_images": 6
             }
         ]
