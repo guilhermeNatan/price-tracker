@@ -28,7 +28,7 @@ const renderizarComLayoutPadrao = Componente => props => {
     const isMobile = useMediaQuery('(max-width:767px)');
     const isDesktop = useMediaQuery('(min-width:992px)');
     const isTablet = useMediaQuery('(min-width:768px) and  (max-width: 991px)');
-    const defaultLayout =  useMediaQuery('(min-width:768px)');
+    const defaultLayout = useMediaQuery('(min-width:768px)');
 
     return (
         <InternalLayout>
@@ -39,10 +39,10 @@ const renderizarComLayoutPadrao = Componente => props => {
                 isCriar={props.match.params.operacao === 'criar'}
                 history={history}
                 mediaQuery={{
-                    isMobile:isMobile,
-                    isDesktop:isDesktop,
-                    isTablet:isTablet,
-                    defaultLayout:defaultLayout
+                    isMobile: isMobile,
+                    isDesktop: isDesktop,
+                    isTablet: isTablet,
+                    defaultLayout: defaultLayout
                 }}
 
             />
@@ -52,14 +52,14 @@ const renderizarComLayoutPadrao = Componente => props => {
 
 
 export const renderizarComLayoutLogin = Componente => (props) => {
-  const elemento = (<Componente params={props.match.params} {...props} />);
-  return (
-    <div>
-      {
-          elemento
-        }
-    </div>
-  );
+    const elemento = (<Componente params={props.match.params} {...props} />);
+    return (
+        <div>
+            {
+                elemento
+            }
+        </div>
+    );
 };
 
 const login = renderizarComLayoutLogin(Login);
@@ -72,68 +72,84 @@ const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
 const confirmEmail = renderizarComLayoutPadrao(ConfirmEmailScreen);
 const adForm = renderizarComLayoutPadrao(AnnounceScreen);
 
-class Rotas extends Component{
-    componentDidMount() {
+class Rotas extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            loading: null
+        }
+    }
+
+    async componentDidMount() {
         const {asyncGetUserDetails} = this.props;
-        asyncGetUserDetails();
+        await asyncGetUserDetails(
+            () => this.setState({loading: false}),
+            () => this.setState({loading: false}),
+            () => this.setState({loading: true}))
     }
 
     render() {
-    const { message, closseMessageAct, user} = this.props;
+        const {message, closseMessageAct, user} = this.props;
+        if (this.state.loading === false) {
+            return (
 
-    return (
-        <div>
-            <Switch>
-                <Route exact
-                       path={BARRA}
-                       component={home}/>
-                <Route exact
-                       path={SEARCH.search}
-                       component={pesquisa}/>
-                <Route exact
-                       path={AUTH.login}
-                       component={login}/>
-                <Route exact
-                       path={AUTH.signup}
-                       component={signupScreen}/>
+                <div>
+                    <Switch>
+                        <Route exact
+                               path={BARRA}
+                               component={home}/>
+                        <Route exact
+                               path={SEARCH.search}
+                               component={pesquisa}/>
+                        <Route exact
+                               path={AUTH.login}
+                               component={login}/>
+                        <Route exact
+                               path={AUTH.signup}
+                               component={signupScreen}/>
 
-                <Route exact
-                       path={AUTH.forgotPassword}
-                       component={forgotPassword}/>
+                        <Route exact
+                               path={AUTH.forgotPassword}
+                               component={forgotPassword}/>
 
-                <Route exact
-                       path={AUTH.resetPassword}
-                       component={resetPassword}/>
+                        <Route exact
+                               path={AUTH.resetPassword}
+                               component={resetPassword}/>
 
-                <PrivateRoute exact
-                       user={user}
-                       path={`${AUTH.confirmEmail}/:confirmEmailToken`}
-                       component={confirmEmail} />
+                        <PrivateRoute exact
+                                      user={user}
+                                      path={`${AUTH.confirmEmail}/:confirmEmailToken`}
+                                      component={confirmEmail}/>
 
-
-                <Route exact
-                              user={user}
-                              path={AD_FORM}
-                              component={adForm}/>
-
-
+                        <PrivateRoute exact
+                                      user={user}
+                                      path={AD_FORM}
+                                      component={adForm}/>
 
 
+                        <Route render={() => <div>Ops : página não encontrada</div>}/>
+                    </Switch>
+                    <Snackbar open={message.showMessage} autoHideDuration={6000}
+                              onClose={closseMessageAct}>
+                        <MuiAlert elevation={6} variant="filled" severity={message.type}>
+                            {message.text}
+                        </MuiAlert>
+                    </Snackbar>
 
-                <Route render={() => <div>Ops : página não encontrada</div>}/>
-            </Switch>
-            <Snackbar open={message.showMessage} autoHideDuration={6000} onClose={closseMessageAct}>
-                <MuiAlert elevation={6} variant="filled" severity={message.type}>
-                    {message.text}
-                </MuiAlert>
-            </Snackbar>
+                </div>
+            );
 
-        </div>
-    );
-  }
+        }
+
+        return <div>Carregando..</div>
+
+
+    }
 }
 
 
-
-const mapStateToProps = state => ({ message: state.message, user: state.user });
+const mapStateToProps = state => ({message: state.message, user: state.user});
 export default connect(mapStateToProps, {asyncGetUserDetails, closseMessageAct})(Rotas);
+
+// export default Rotas;
