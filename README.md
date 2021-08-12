@@ -12,46 +12,6 @@ Monitorar o preço de games na playstation store por meio de scrab.
 * maven 3.6 ou superior configurado
 * jdk 1.8.0_191
 
-# Server-side 
-
-### Estrutura de pastas 
-```
-├── main
-│     ├── java
-│     │     └── com
-│     │         └── price
-│     │             └── tracker
-│     │                 ├── config
-│     │                 ├── controller
-│     │                 │     └── payload
-│     │                 ├── entity
-│     │                 ├── exception
-│     │                 ├── factory
-│     │                 ├── repository
-│     │                 ├── reuse
-│     │                 │     └── util
-│     │                 │         └── data
-│     │                 ├── security
-│     │                 ├── service
-│     │                 │     └── email
-│     │                 │         └── builders
-│     │                 ├── tasklets
-│     │                 └── vo
-│     └── resources
-│         ├── imagens
-│         └── templates
-│             └── fragments
-└── test
-└── java
-└── com
-└── price
-└── tracker
-└── entity
-```
-
-# Estratégia 
-
-
 
 
 # Arquitetura
