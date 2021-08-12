@@ -3,6 +3,7 @@ export default {
         fontWeight: 500,
         fontSize: 35,
         letterSpacing: '-0.24px'
+
     },
     h2: {
         fontWeight: 500,

@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import {Redirect, Route} from 'react-router-dom';
-
+import _ from "lodash";
 
 class PrivateRoute extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: null,
-    };
   }
 
   componentDidMount = async () => {
@@ -16,15 +13,12 @@ class PrivateRoute extends Component {
 
   render() {
     const { component: Comp, ...rest } = this.props;
-    const { user } = this.state;
-    if (!user) {
-      return <div>Verificando acesso...</div>;
-    }
+    const { user } = this.props;
     return (
       <Route
         {...rest}
         render={(props) => {
-          if (user) {
+          if (!_.isEmpty(user)) {
             return (
               <React.Fragment>
                 <Comp {...props} {...rest} />
@@ -34,7 +28,7 @@ class PrivateRoute extends Component {
           return (
             <Redirect
               to={{
-                pathname: '/acessonegado',
+                pathname: '/login',
                 state: { from: props.location },
               }}
             />

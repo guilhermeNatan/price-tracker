@@ -4,17 +4,9 @@
 
 import ServiceUtil from "../service/ServiceUtil";
 import {ACCESS_TOKEN, AUTH, USER} from "../constants/Endpoints";
+import AuthService from "../service/AuthService";
 
 
-export const asyncSignin =  ({usernameOrEmail,  password}, onSuccess, onError) => async dispacth => {
-   await ServiceUtil.makePostRequest({usernameOrEmail,  password}, `${AUTH.signin}`,
-        (response) => {
-            localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
-            onSuccess()
-        },
-       onError
-    )
-};
 
 
 export const GET_USER_DETAILS = 'GET_USER_DETAILS';
@@ -32,4 +24,12 @@ export const asyncGetUserDetails =  (onSuccess, onError) => async dispacth => {
         },
         onError
     )
+};
+
+export const LOGOUT = 'LOGOUT';
+export const logout = () => {
+    AuthService.logout();
+    return ({
+        type: LOGOUT
+    })
 };

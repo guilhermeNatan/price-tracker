@@ -25,7 +25,7 @@ import SignUpFormFieldsSpecifications
     from "../../reuse-components/SignUpFormFields/SignUpFormFieldsSpecifications";
 import {SignUpFormFields} from "../../reuse-components/SignUpFormFields";
 import {connect} from 'react-redux';
-import {asyncGetUserDetails} from "../../actions/userAction";
+import {asyncGetUserDetails, logout} from "../../actions/userAction";
 import AuthService from "../../service/AuthService";
 import _ from 'lodash';
 import {ACCESS_TOKEN} from "../../constants/Endpoints";
@@ -77,11 +77,11 @@ const DrawableLayout = ({children, history, asyncGetUserDetails, user}) => {
                     </IconButton>
                     <div style={{display: 'flex', flexDirection: 'row', flex: 1}}>
                         <Typography variant="h3" color={"secondary"} style={{display: 'flex', flex: 1}}>
-                            Jogo justo
+                            Troca e Vendas Capelinha
                         </Typography>
 
                         {
-                            !_.isEmpty(user) && <UserMenu/>
+                            !_.isEmpty(user) && <UserMenu logout={logout} history={history}/>
                         }
                         {
                             _.isEmpty(user) && <>
@@ -144,4 +144,4 @@ const DrawableLayout = ({children, history, asyncGetUserDetails, user}) => {
 }
 
 const mapStateToProps = state => ({user: state.user});
-export default connect(mapStateToProps, {asyncGetUserDetails})(DrawableLayout);
+export default connect(mapStateToProps, {asyncGetUserDetails, logout})(DrawableLayout);

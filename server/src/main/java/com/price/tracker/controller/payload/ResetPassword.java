@@ -26,7 +26,7 @@ public class ResetPassword
   private String token;
 
 
-  @NotNull
+
   private Boolean isCliente;
 
 }

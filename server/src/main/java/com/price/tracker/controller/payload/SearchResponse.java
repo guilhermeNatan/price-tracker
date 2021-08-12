@@ -1,6 +1,5 @@
 package com.price.tracker.controller.payload;
 
-import com.price.tracker.vo.GameVo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +17,5 @@ public class SearchResponse
   private int page;
   private String termoPesquisado;
   private Calendar dataAtual;
-  private List<GameVo> conteudo = new ArrayList<>();
+//  private List<GameVo> conteudo = new ArrayList<>();
 }
