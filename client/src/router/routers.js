@@ -8,13 +8,14 @@ import {Login} from '../pages/Login';
 import {SignupScreen} from '../pages/Signup';
 import {ForgotPasswordScreen} from '../pages/ForgotPassword';
 import {ResetPasswordScreen} from '../pages/ResetPassword';
+import {AdDetailScreen} from '../pages/AdDetail';
 import {SearchScreen} from "../pages/Search";
 import {Home} from "../pages/Home";
 import {GameDetailScreen} from "../pages/GameDetail";
 import {ConfirmEmailScreen} from "../pages/ConfirmEmail";
 import {AnnounceScreen} from "../pages/Announce";
 
-import {AD_FORM, AUTH, BARRA, SEARCH} from "../constants/RoutePaths";
+import {AD, AUTH, BARRA, SEARCH} from "../constants/RoutePaths";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import {closseMessageAct, asyncGetUserDetails} from '../actions';
@@ -71,6 +72,9 @@ const home = renderizarComLayoutPadrao(Home);
 const gameDetail = renderizarComLayoutPadrao(GameDetailScreen);
 const confirmEmail = renderizarComLayoutPadrao(ConfirmEmailScreen);
 const adForm = renderizarComLayoutPadrao(AnnounceScreen);
+const adDetail = renderizarComLayoutPadrao(AdDetailScreen);
+
+
 
 class Rotas extends Component {
 
@@ -117,6 +121,11 @@ class Rotas extends Component {
                                path={AUTH.resetPassword}
                                component={resetPassword}/>
 
+                        <Route exact
+                               user={user}
+                               path={`${AD.adDetail}/:id`}
+                               component={adDetail}/>
+
                         <PrivateRoute exact
                                       user={user}
                                       path={`${AUTH.confirmEmail}/:confirmEmailToken`}
@@ -124,8 +133,9 @@ class Rotas extends Component {
 
                         <PrivateRoute exact
                                       user={user}
-                                      path={AD_FORM}
+                                      path={AD.addForm}
                                       component={adForm}/>
+
 
 
                         <Route render={() => <div>Ops : página não encontrada</div>}/>

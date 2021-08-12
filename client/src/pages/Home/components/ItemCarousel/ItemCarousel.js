@@ -21,12 +21,12 @@ const styles = {
 };
 
 function MediaCard(props) {
-    const { classes, image, headline, description, isMoving } = props;
+    const { classes, image, headline, description, isMoving, onPress } = props;
 
     return (
 
             <Card className={classes.card}>
-                <CardActionArea>
+                <CardActionArea onClick={onPress}>
                     <CardMedia className={classes.media} image={image} title={headline} />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">

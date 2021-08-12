@@ -64,7 +64,9 @@ class SearchScreen extends Component {
 
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: "center",  marginRight: '10vw', marginLeft: '10vw'}}>
 
-              <RecentAnnoucements />
+              <RecentAnnoucements
+                  history={history}
+              />
             </div>
 
             {/*Esse componente será utilizado na tela de pesquisa*/}

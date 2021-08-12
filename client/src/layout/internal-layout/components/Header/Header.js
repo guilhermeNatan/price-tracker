@@ -7,7 +7,7 @@ import _ from "lodash";
 import {UserMenu} from "../../../drawable-layout/components/UserMenu";
 import AuthService from "../../../../service/AuthService";
 import {asyncGetUserDetails, logout, showMessageAct} from "../../../../actions";
-import {AD_FORM, AUTH, BARRA} from "../../../../constants/RoutePaths";
+import {AD, AUTH, BARRA} from "../../../../constants/RoutePaths";
 import Button from "@material-ui/core/Button";
 import {Logo} from "../../../../reuse-components/Logo";
 
@@ -70,7 +70,7 @@ class Header extends Component {
                   style={{
                     marginRight: '4vw'
                   }}
-                  onClick={() => history.push(AD_FORM)}
+                  onClick={() => history.push(AD.addForm)}
           >
             Anunciar
           </Button>

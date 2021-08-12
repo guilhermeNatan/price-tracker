@@ -13,7 +13,9 @@ class ResultSearch extends PureComponent {
             price:  'R$ 600,00',
             description: ' Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
             publishDate: '06-12-1991',
-            address: 'Capelinha'
+            address: 'Capelinha',
+            id: 1,
+
         },
         {
             image: 'https://img.olx.com.br/thumbs256x256/92/922115269743729.jpg',
@@ -21,7 +23,8 @@ class ResultSearch extends PureComponent {
             price:  'R$ 600,00',
             description: ' Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
             publishDate: '06-12-1991',
-            address: 'Belo Horizonte'
+            address: 'Belo Horizonte',
+            id: 2,
         },
         {
             image: 'https://img.olx.com.br/thumbs256x256/92/922115269743729.jpg',
@@ -29,7 +32,8 @@ class ResultSearch extends PureComponent {
             price:  'R$ 600,00',
             publishDate: '06-12-1991',
             description: ' Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-            address: 'Belo Horizonte'
+            address: 'Belo Horizonte',
+            id: 3,
         },
         {
             image: 'https://img.olx.com.br/thumbs256x256/83/830196138322724.jpg',
@@ -37,13 +41,14 @@ class ResultSearch extends PureComponent {
             price:  'R$ 600,00',
             publishDate: '06-12-1991',
             description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-            address: 'Capelinha'
+            address: 'Capelinha',
+            id: 4,
         },
     ]
 
 
   render() {
-    const {data, isLoading, onRowClick} = this.props;
+    const {data, isLoading, onRowClick, history} = this.props;
 
     return (
       <div style={styles.container}>
@@ -69,7 +74,7 @@ class ResultSearch extends PureComponent {
             components={{
                 Row: ({data}) => {
                     return (
-                        <CardResult anuncio={data} />
+                        <CardResult anuncio={data} history={history} />
                     )
                 }
             }}

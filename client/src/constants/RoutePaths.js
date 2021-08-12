@@ -15,4 +15,8 @@ export const SEARCH = {
 
 export const BARRA = "/"
 
-export const  AD_FORM = "/ad/form"
+export const  AD = {
+        addForm: "/ad/form",
+        adDetail: "/ad/detail",
+        adEdit: "/ad/update/:id"
+}

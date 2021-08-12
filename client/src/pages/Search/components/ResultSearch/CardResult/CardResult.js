@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import _ from "lodash";
+import {AD} from "../../../../../constants/RoutePaths";
 
 // {
 //     image: 'https://img.olx.com.br/thumbs256x256/83/830196138322724.jpg',
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
     },
 });
 
-const CardResult = ({anuncio, isMobile}) => {
+const CardResult = ({anuncio, isMobile, history}) => {
     const  {image, title, price, publishDate, address, description} = anuncio;
     const classes = useStyles();
 
@@ -33,7 +34,7 @@ const CardResult = ({anuncio, isMobile}) => {
             padding: '2%',
             height: '30vh',
         }}>
-            <CardActionArea>
+            <CardActionArea onClick={() => history.push(`${AD.adDetail}/${anuncio.id}` )}>
 
                 <div style={{
                     display: 'flex',

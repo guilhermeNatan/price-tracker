@@ -68,7 +68,9 @@ class SearchScreen extends Component {
                 <Grid item >
                     <ResultSearch data={resultSearch}
                                   isLoading={isLoading}
-                                  onRowClick={this.onRowClick}/>
+                                  onRowClick={this.onRowClick}
+                                  history={history}
+                    />
 
                 </Grid>
             </div>
