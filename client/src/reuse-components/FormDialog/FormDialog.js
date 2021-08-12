@@ -36,6 +36,7 @@ function FormDialog({ mainButtonName="FormDialog", confirmButtonName="Submit", c
             >
                 {mainButtonName}
             </Button>
+
             <Dialog
                 open={open}
                 onClose={handleClose}

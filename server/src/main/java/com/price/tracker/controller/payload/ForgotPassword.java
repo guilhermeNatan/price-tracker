@@ -20,6 +20,5 @@ public class ForgotPassword
   @Email
   private String email;
 
-  @NotNull
   private Boolean isCliente;
 }

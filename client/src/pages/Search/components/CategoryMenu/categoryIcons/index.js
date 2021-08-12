@@ -1,0 +1,9 @@
+export const mobileFone  = require('./009-mobile-phone.svg')  ;
+export const carIcon = require( './010-car.svg');
+export const bussinessIcon = require( './011-mulher-de-negocios.svg');
+export const toolsIcon = require( './012-tools.svg');
+export const dressIcon = require( './013-dress.svg');
+export const guitarIcon = require( './014-guitar.svg');
+export const bedIcon = require( './015-bed.svg');
+export const homeIcon = require( './016-home.svg');
+export const basketBallIcon = require( './017-basketball-ball.svg');

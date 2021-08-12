@@ -4,7 +4,7 @@
 
 const publicUrl= 'public'
 export const SEARCH_GAME = 'public/games/search';
-export const ACCESS_TOKEN = 'JogoBaixoAccessToken';
+export const ACCESS_TOKEN = 'troca-vendas-cap';
 
 export const AUTH = {
     auth: `${publicUrl}/auth`,
